@@ -8,3 +8,7 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+ .test {
+    border: 1px solid red;
+ }
