@@ -16,7 +16,7 @@
     </div>
     <div class="mx-auto max-w-7xl px-6 pt-10 pb-24 sm:pb-32 lg:flex lg:px-8 lg:py-25">
       <div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8">
-        <svg enable-background="new 0 0 128 128" height="100px" id="Layer_1" version="1.1" viewBox="0 0 128 128" width="100px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg enable-background="new 0 0 128 128" height="70px" id="Layer_1" version="1.1" viewBox="0 0 128 128" width="70px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           <path fill="#F44336" d="M112.005,50.192h-96c-0.778,0-1.485-0.451-1.813-1.157s-0.217-1.538,0.284-2.132L37.5,19.595  c0.38-0.451,0.939-0.711,1.529-0.711h49.957c0.59,0,1.149,0.26,1.529,0.711l23.019,27.308c0.501,0.595,0.612,1.427,0.284,2.132  S112.783,50.192,112.005,50.192z M20.308,46.192h87.396L88.057,22.884H39.959L20.308,46.192z"/>
           <polygon fill="#F44336" points="64.005,108.299 14.475,49.48 17.535,46.904 64.005,102.088 110.475,46.904 113.535,49.48 "/>
           <path fill="#F44336" d="M64.005,107.193L64.005,107.193c-0.849,0-1.604-0.535-1.886-1.335L42.023,48.857c-0.221-0.625-0.117-1.317,0.275-1.851  l20.096-27.308c0.752-1.024,2.467-1.024,3.221,0l20.1,27.308c0.393,0.533,0.496,1.226,0.275,1.851l-20.1,57.001  C65.609,106.658,64.854,107.193,64.005,107.193z M46.147,48.525l17.857,50.654l17.861-50.654L64.005,24.258L46.147,48.525z"/>
@@ -25,7 +25,7 @@
         </svg>
     
     
-        <h1 class="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl dark:text-white">Companies using Ruby on Rails.</h1>
+        <h1 class="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl dark:text-white">List of companies using <span class="text-highligther">Ruby on Rails</span>.</h1>
         <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">Don’t waste your time — get a complete list of Rails-powered businesses in one easy-to-use file.</p>
         <div class="mt-10 flex items-center gap-x-6">
           <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Get started</a>
@@ -46,7 +46,7 @@
                 <span class="flex flex-col text-sm">
                   <span class="font-medium text-gray-900 dark:text-white">USA</span>
                   <span class="text-gray-500 dark:text-gray-400">
-                    <span class="block sm:inline">135 companies</span>
+                    <span class="block sm:inline"><%= pluralize(companies_amount_helper("USA"), 'company') %></span>
                   </span>
                 </span>
               </span>
@@ -60,7 +60,7 @@
                 <span class="flex flex-col text-sm">
                   <span class="font-medium text-gray-900 dark:text-white">United Kingdom</span>
                   <span class="text-gray-500 dark:text-gray-400">
-                    <span class="block sm:inline">40 companies</span>
+                    <span class="block sm:inline"><%= pluralize(companies_amount_helper("United Kingdom"), 'company') %></span>
                   </span>
                 </span>
               </span>
@@ -68,13 +68,13 @@
                 <span class="font-medium text-gray-900 dark:text-white">$80</span>
               </span>
             </label>
-            <label aria-label="Australia" aria-description="List of companies powered by Ruby on Rails in Australia." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
+            <label aria-label="Canada" aria-description="List of companies powered by Ruby on Rails in Canada." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
               <input type="radio" name="plan" value="enterprise" class="absolute inset-0 appearance-none focus:outline-none" />
               <span class="flex items-center">
                 <span class="flex flex-col text-sm">
-                  <span class="font-medium text-gray-900 dark:text-white">Australia</span>
+                  <span class="font-medium text-gray-900 dark:text-white">Canada</span>
                   <span class="text-gray-500 dark:text-gray-400">
-                    <span class="block sm:inline">32GB / 12 CPUs</span>
+                    <span class="block sm:inline"><%= pluralize(companies_amount_helper("Canada"), 'company') %></span>
                     <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
                     <span class="block sm:inline">1024 GB SSD disk</span>
                   </span>
@@ -86,17 +86,11 @@
               </span>
             </label>
           </div>
-
-          <div>
-            <label for="email" class="mt-5 block text-sm/6 font-medium text-gray-900 dark:text-white">Your Email</label>
-            <div class="mt-2">
-              <input id="email" type="email" name="email" placeholder="you@example.com" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500" />
-            </div>
-            <p id="email-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400">You will get a link to download a file.</p>
-          </div>
-
-          <button type="button" class="mt-5 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Checkout</button>
-
+          
+          <a href="https://buy.stripe.com/test_00w00jboOgsRdbs4Pr8k801" target="_blank" rel="nofollow">
+            <button type="button" class="mt-5 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Checkout</button>
+          </a>
+          <p id="email-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Continue to get a link to download a file.</p>
         </fieldset>
       </div>
     </div>
@@ -111,6 +105,27 @@
         </span>
       </div>
       <div aria-hidden="true" class="w-full border-t border-gray-300 dark:border-white/15"></div>
+    </div>
+  </div>
+
+  <div data-controller="link-toggle">
+    <label>
+      <input 
+        type="checkbox"
+        data-link-toggle-target="checkbox"
+        data-action="change->link-toggle#updateLink"
+      >
+      Change link destination
+    </label>
+
+    <div class="mt-4">
+      <a 
+        href="https://example.com/unchecked"
+        data-link-toggle-target="link"
+        class="text-blue-500 underline"
+      >
+        Go to unchecked page
+      </a>
     </div>
   </div>
 
