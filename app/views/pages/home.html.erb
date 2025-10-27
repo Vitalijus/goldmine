@@ -33,65 +33,67 @@
         </div>
       </div>
 
-      <div class="mx-auto mt-16 max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32">
-       <div>
-        <label for="email" class="mb-5 block text-sm/6 font-medium text-gray-900 dark:text-white">Select a Product</label>
-      </div>
-
-      <fieldset aria-label="List of companies">
-          <div class="space-y-4">
-            <label aria-label="USA" aria-description="List of companies powered by Ruby on Rails in USA." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
-              <input type="radio" name="plan" value="usa" checked class="absolute inset-0 appearance-none focus:outline-none" />
-              <span class="flex items-center">
-                <span class="flex flex-col text-sm">
-                  <span class="font-medium text-gray-900 dark:text-white">USA</span>
-                  <span class="text-gray-500 dark:text-gray-400">
-                    <span class="block sm:inline"><%= pluralize(companies_amount_helper("USA"), 'company') %></span>
-                  </span>
-                </span>
-              </span>
-              <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                <span class="font-medium text-gray-900 dark:text-white">$40</span>
-              </span>
-            </label>
-            <label aria-label="United Kingdom" aria-description="List of companies powered by Ruby on Rails in the UK." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
-              <input type="radio" name="plan" value="startup" class="absolute inset-0 appearance-none focus:outline-none" />
-              <span class="flex items-center">
-                <span class="flex flex-col text-sm">
-                  <span class="font-medium text-gray-900 dark:text-white">United Kingdom</span>
-                  <span class="text-gray-500 dark:text-gray-400">
-                    <span class="block sm:inline"><%= pluralize(companies_amount_helper("United Kingdom"), 'company') %></span>
-                  </span>
-                </span>
-              </span>
-              <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                <span class="font-medium text-gray-900 dark:text-white">$80</span>
-              </span>
-            </label>
-            <label aria-label="Canada" aria-description="List of companies powered by Ruby on Rails in Canada." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
-              <input type="radio" name="plan" value="enterprise" class="absolute inset-0 appearance-none focus:outline-none" />
-              <span class="flex items-center">
-                <span class="flex flex-col text-sm">
-                  <span class="font-medium text-gray-900 dark:text-white">Canada</span>
-                  <span class="text-gray-500 dark:text-gray-400">
-                    <span class="block sm:inline"><%= pluralize(companies_amount_helper("Canada"), 'company') %></span>
-                    <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
-                    <span class="block sm:inline">1024 GB SSD disk</span>
-                  </span>
-                </span>
-              </span>
-              <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                <span class="font-medium text-gray-900 dark:text-white">$240</span>
-                <span class="ml-1 text-gray-500 sm:ml-0 dark:text-gray-400">/mo</span>
-              </span>
-            </label>
+      <div data-controller="link-toggle">
+        <div class="mx-auto mt-16 max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32">
+          <div>
+            <label for="email" class="mb-5 block text-sm/6 font-medium text-gray-900 dark:text-white">Select a Product</label>
           </div>
-          
-          <a href="https://buy.stripe.com/test_00w00jboOgsRdbs4Pr8k801" target="_blank" rel="nofollow">
-            <button type="button" class="mt-5 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Checkout</button>
-          </a>
-          <p id="email-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Continue to get a link to download a file.</p>
-        </fieldset>
+
+          <fieldset aria-label="List of companies">
+            <div class="space-y-4">
+              <label aria-label="USA" aria-description="List of companies powered by Ruby on Rails in USA." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
+                <input type="radio" name="plan" value="usa" checked data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
+                <span class="flex items-center">
+                  <span class="flex flex-col text-sm">
+                    <span class="font-medium text-gray-900 dark:text-white">USA</span>
+                    <span class="text-gray-500 dark:text-gray-400">
+                      <span class="block sm:inline"><%= pluralize(companies_amount_helper("USA"), 'company') %></span>
+                    </span>
+                  </span>
+                </span>
+                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
+                  <span class="font-medium text-gray-900 dark:text-white">$40</span>
+                </span>
+              </label>
+              <label aria-label="United Kingdom" aria-description="List of companies powered by Ruby on Rails in the UK." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
+                <input type="radio" name="plan" value="united kingdom" data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
+                <span class="flex items-center">
+                  <span class="flex flex-col text-sm">
+                    <span class="font-medium text-gray-900 dark:text-white">United Kingdom</span>
+                    <span class="text-gray-500 dark:text-gray-400">
+                      <span class="block sm:inline"><%= pluralize(companies_amount_helper("United Kingdom"), 'company') %></span>
+                    </span>
+                  </span>
+                </span>
+                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
+                  <span class="font-medium text-gray-900 dark:text-white">$80</span>
+                </span>
+              </label>
+              <label aria-label="Canada" aria-description="List of companies powered by Ruby on Rails in Canada." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
+                <input type="radio" name="plan" value="canada" data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
+                <span class="flex items-center">
+                  <span class="flex flex-col text-sm">
+                    <span class="font-medium text-gray-900 dark:text-white">Canada</span>
+                    <span class="text-gray-500 dark:text-gray-400">
+                      <span class="block sm:inline"><%= pluralize(companies_amount_helper("Canada"), 'company') %></span>
+                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
+                      <span class="block sm:inline">1024 GB SSD disk</span>
+                    </span>
+                  </span>
+                </span>
+                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
+                  <span class="font-medium text-gray-900 dark:text-white">$240</span>
+                  <span class="ml-1 text-gray-500 sm:ml-0 dark:text-gray-400">/mo</span>
+                </span>
+              </label>
+            </div>
+
+            <a data-link-toggle-target="link" href="#" target="_blank" rel="nofollow">
+              <button type="button" class="mt-5 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Checkout</button>
+            </a>
+            <p id="email-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Continue to get a link to download a file.</p>
+          </fieldset>
+        </div>
       </div>
     </div>
 
@@ -105,27 +107,6 @@
         </span>
       </div>
       <div aria-hidden="true" class="w-full border-t border-gray-300 dark:border-white/15"></div>
-    </div>
-  </div>
-
-  <div data-controller="link-toggle">
-    <label>
-      <input 
-        type="checkbox"
-        data-link-toggle-target="checkbox"
-        data-action="change->link-toggle#updateLink"
-      >
-      Change link destination
-    </label>
-
-    <div class="mt-4">
-      <a 
-        href="https://example.com/unchecked"
-        data-link-toggle-target="link"
-        class="text-blue-500 underline"
-      >
-        Go to unchecked page
-      </a>
     </div>
   </div>
 
