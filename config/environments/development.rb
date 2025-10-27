@@ -72,7 +72,7 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
-  # Run rails console and test in dev is SMTP work
+  # Run rails console and test in dev if SMTP work
   # ActionMailer::Base.mail(
   #   from: "vitalijus.desukas@smartroute.io",
   #   to: "vitalij.desuk@gmail.com",
