@@ -9,6 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
- .test {
+ .borderline {
     border: 1px solid red;
+ }
+
+ .text-highligther {
+    color: #F44336;
  }
