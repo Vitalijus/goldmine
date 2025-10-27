@@ -31,10 +31,18 @@ class Stripe::Webhooks
       when  "payment_intent.succeeded"
         # https://docs.stripe.com/api/events/types#event_types-payment_intent.succeeded
         
-        binding.pry
-        stripe_payment_intent = data["object"]["id"]
+        # binding.pry
+        stripe_payment_intent_id = data["object"]["id"]
         amount = data["object"]["amount"]
-        
+        # stripe_product_id = data["object"]["payment_details"]["order_reference"]
+        # client_email = data["object"]["charges"]["data"][0]["email"]
+
+        payment = Payment.create(
+            stripe_payment_intent_id: stripe_payment_intent_id,
+            amount: amount,
+        )
+
+        Rails.logger.error("=================== Event type: payment_intent.succeeded ==================")
 
         # checkout_session_id = data["object"]["id"]
         # client_reference_id = data["object"]["client_reference_id"]
