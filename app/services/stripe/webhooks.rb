@@ -32,9 +32,10 @@ class Stripe::Webhooks
         amount = data["object"]["amount"]
         # stripe_product_id = data["object"]["payment_details"]["order_reference"]
         # client_email = data["object"]["charges"]["data"][0]["email"]
+        client_email = "vitalij.desuk@gmail.com"
         
         # binding.pry
-        Payment.create(stripe_payment_intent: stripe_payment_intent, amount: amount)
+        Payment.create(stripe_payment_intent: stripe_payment_intent, amount: amount, client_email: client_email)
         Rails.logger.info("=================== Event type: payment_intent.succeeded ==================")
       else
         # Display error message in logs when event.type is not handled.

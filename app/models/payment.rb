@@ -4,7 +4,7 @@ class Payment < ApplicationRecord
     private
 
     def send_download_email
-        # UserMailer.download_email(self).deliver_later
-        Rails.logger.info("Email with download link sent to: #{email}")
+        # PaymentMailer.download_email(self).deliver_later
+        # Rails.logger.info("Email with download link sent to: #{self.client_email}")
     end
 end
