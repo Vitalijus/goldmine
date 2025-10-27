@@ -52,13 +52,22 @@ group :development, :test do
   
   # Testing framework
   gem "rspec-rails"
+  
+  # ENV vars
+  gem 'dotenv-rails'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  # Debug tool
+  gem 'pry', '~> 0.15.0'
 end
 
+# Styles
 gem "tailwindcss-ruby", "~> 4.1"
-
 gem "tailwindcss-rails", "~> 4.3"
+
+# Payment provider
+gem 'stripe'
