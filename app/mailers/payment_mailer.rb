@@ -3,7 +3,7 @@ class PaymentMailer < ApplicationMailer
 
     def download_email(payment)
       @payment = payment
-      @url  = "https://yourapp.com/login"
+      @url = ENV.fetch("LIST_DOWNLOAD_URL") + "download?id=#{@payment.id}"
       mail(to: @payment.client_email, subject: "Download link")
     end
 end

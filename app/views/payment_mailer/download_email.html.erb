@@ -1,2 +1,95 @@
-<h1>Welcome, <%= @payment.client_email %>!</h1>
-<p>Thanks for signing up. You can log in at <a href="<%= @url %>"><%= @url %></a>.</p>
+<!-- Email template: use as an ActionMailer view (HTML) -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Welcome</title>
+
+  <style>
+    /* Basic responsive styles for email clients */
+    @media only screen and (max-width: 600px) {
+      .container { width: 100% !important; padding: 20px !important; }
+      .hero { font-size: 20px !important; }
+      .content { font-size: 16px !important; }
+      .button { width: 100% !important; display: block !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f6f8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Preheader (hidden) -->
+  <div style="display:none; max-height:0px; overflow:hidden; mso-hide:all;">
+    Thanks for your purchase — your Rails companies list is ready. Sign in to download.
+  </div>
+
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f4f6f8;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" class="container" border="0" cellpadding="0" cellspacing="0" width="600" style="width:600px; max-width:100%; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(16,24,40,0.08);">
+          <!-- Header -->
+          <tr>
+            <td style="padding:28px 32px; background:linear-gradient(90deg,#4f46e5,#7c3aed); color:#fff;">
+              <h1 style="margin:0; font-size:20px; font-weight:700; letter-spacing:-0.02em;">Thank you for your purchase!</h1>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:32px;">
+              <p style="margin:0 0 16px 0; color:#0f172a; font-size:18px; line-height:1.4;" class="hero">
+                Welcome, <strong><%= @payment.client_email %></strong> 👋
+              </p>
+
+              <p style="margin:0 0 16px 0; color:#334155; font-size:16px; line-height:1.5;" class="content">
+                We’re excited you chose our <strong>Ruby on Rails companies list</strong>. Your purchase helps you skip hours of research and connect directly with companies using Rails in production.
+              </p>
+
+              <p style="margin:0 0 24px 0; color:#334155; font-size:16px; line-height:1.5;">
+                To access your download and account, click the button below. If the button doesn’t work, you can copy and paste this link into your browser:
+              </p>
+
+              <!-- CTA button -->
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin:0 0 18px 0;">
+                <tr>
+                  <td align="center">
+                    <a href="<%= @url %>" class="button" style="background:#4f46e5; color:#ffffff; text-decoration:none; padding:14px 22px; border-radius:10px; display:inline-block; font-weight:600; font-size:16px; box-shadow:0 6px 18px rgba(79,70,229,0.18);">
+                      Access your list
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0 0 12px 0; color:#475569; font-size:13px;">
+                <small>Direct link: <a href="<%= @url %>" style="color:#334155; text-decoration:underline;"><%= @url %></a></small>
+              </p>
+
+              <hr style="border:none; border-top:1px solid #eef2ff; margin:22px 0;">
+
+              <!-- Support -->
+              <p style="margin:22px 0 0 0; color:#475569; font-size:14px;">
+                If you need help downloading or want a custom export, reply to this email or contact <a href="mailto:support@railslist.io" style="color:#4f46e5; text-decoration:underline;">support@railslist.io</a>.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 32px; background:#fbfbff; color:#64748b; font-size:13px;">
+              <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <div style="font-weight:600; color:#0f172a;">RailsList</div>
+                    <div style="margin-top:6px;">&copy; <%= Time.now.year %> RailsList. All rights reserved.</div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
