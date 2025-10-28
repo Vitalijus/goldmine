@@ -28,10 +28,10 @@ class Stripe::Webhooks
       case event_type
       when  "payment_intent.succeeded"
         # https://docs.stripe.com/api/events/types#event_types-payment_intent.succeeded
-        stripe_payment_intent = data.dig("object", "id")
-        amount = data.dig("object", "amount")
-        client_email = data.dig("object", "charges", "data", 0, "billing_details", "email")
-        stripe_product_id = data.dig("object", "payment_details", "order_reference")
+        stripe_payment_intent = object&.id
+        amount = object&.amount
+        client_email = object&.charges&.data&.first&.billing_details&.email
+        stripe_product_id = object&.payment_details&.order_reference
 
         # client_email = "vitalij.desuk@gmail.com"
         # stripe_product_id = "prod_TJTnGqRxmkDf5E"
