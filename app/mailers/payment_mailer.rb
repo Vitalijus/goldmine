@@ -1,5 +1,5 @@
 class PaymentMailer < ApplicationMailer
-    default from: "vitalijus.desukas@smartroute.io"
+    default from: "support@rorlist.com"
 
     def download_email(payment)
       @payment = payment

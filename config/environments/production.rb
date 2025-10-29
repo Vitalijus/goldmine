@@ -89,7 +89,7 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "goldmine-1-a1aa4c7d0ce5.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "rorlist.com" }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
