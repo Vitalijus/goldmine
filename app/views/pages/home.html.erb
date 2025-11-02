@@ -23,11 +23,11 @@
           <rect fill="#F44336" height="4" transform="matrix(0.1759 0.9844 -0.9844 0.1759 68.1737 -12.3602)" width="27.74" x="27.599" y="32.538"/>
           <rect fill="#F44336" height="27.741" transform="matrix(0.9844 0.176 -0.176 0.9844 7.431 -14.695)" width="4" x="84.545" y="20.668"/>
         </svg>
-    
-    
+
+
         <h1 class="mt-10 text-5xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-7xl dark:text-white">Discover companies using <span class="text-highligther">Ruby on Rails</span>.</h1>
         <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">Don’t waste your time — get a complete list of Rails-powered businesses in one easy-to-use file.</p>
-        
+
         <div class="mt-10 space-y-4">
           <blockquote class="text-sm text-gray-600 dark:text-gray-400 italic border-l-2 border-indigo-500 pl-3">
             “Exactly what I needed to research Rails startups. Saved me hours.”
@@ -50,7 +50,7 @@
                   <span class="flex flex-col text-sm">
                     <span class="font-medium text-gray-900 dark:text-white">USA</span>
                     <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(companies_amount_helper("USA"), 'company') %></span>
+                      <span class="block sm:inline"><%= pluralize(companies_amount_helper(["USA"]), 'company') %></span>
                       <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
                       <span class="block sm:inline">sample_file.pdf</span>
                     </span>
@@ -66,7 +66,7 @@
                   <span class="flex flex-col text-sm">
                     <span class="font-medium text-gray-900 dark:text-white">United Kingdom</span>
                     <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(companies_amount_helper("United Kingdom"), 'company') %></span>
+                      <span class="block sm:inline"><%= pluralize(companies_amount_helper(["United Kingdom"]), 'company') %></span>
                       <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
                       <span class="block sm:inline">sample_file.pdf</span>
                     </span>
@@ -82,7 +82,7 @@
                   <span class="flex flex-col text-sm">
                     <span class="font-medium text-gray-900 dark:text-white">Canada</span>
                     <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(companies_amount_helper("Canada"), 'company') %></span>
+                      <span class="block sm:inline"><%= pluralize(companies_amount_helper(["Canada"]), 'company') %></span>
                       <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
                       <span class="block sm:inline">sample_file.pdf</span>
                     </span>
@@ -301,6 +301,3 @@
     </div>
   </footer>
 </div>
-
-
-

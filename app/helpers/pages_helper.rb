@@ -1,5 +1,5 @@
 module PagesHelper
-    def companies_amount_helper(country)
-        Company.where(country: country).count
+    def companies_amount_helper(countries)
+        Company.where(countries: countries).count
     end
 end
