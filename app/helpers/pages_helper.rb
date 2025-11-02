@@ -1,5 +1,5 @@
 module PagesHelper
-    def companies_amount_helper(countries)
-        Company.where(countries: countries).count
-    end
+  def companies_total_helper(countries)
+    Company.all.select { |c| (c.countries & countries).any? }.count
+  end
 end

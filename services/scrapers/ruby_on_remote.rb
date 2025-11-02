@@ -5,11 +5,12 @@ require 'uri'
 require_relative '../utils/tech_stack.rb'
 
 # --- Run the crawler ---
+# require Rails.root.join("services/scrapers/ruby_on_remote.rb")
 # Scrapers::RubyOnRemote.new("https://rubyonremote.com/").start
 
 module Scrapers
   class RubyOnRemote
-    MAX_PAGES = 1
+    MAX_PAGES = 500
 
     def initialize(base_url)
       @base_url = base_url
@@ -28,7 +29,6 @@ module Scrapers
 
     # --- Queue-based crawler ---
     def crawl_queue
-      binding.pry
       until @queue.empty? || @visited.size >= MAX_PAGES
         url = @queue.shift
         next if @visited.include?(url)
@@ -117,26 +117,26 @@ module Scrapers
            Company.create!(create_company(job))
          end
       end
+    end
 
-      def update_company(company, job)
-        {
-          programming_languages: (company.programming_languages + job[:programming_languages]).uniq,
-          frameworks: (company.frameworks + job[:frameworks]).uniq,
-          other_tech_stack: (company.other_tech_stack + job[:other_tech_stack]).uniq,
-          countries: (company.countries + job[:countries]).uniq
-        }
-      end
+    def update_company(company, job)
+      {
+        programming_languages: (company.programming_languages + job[:programming_languages]).uniq,
+        frameworks: (company.frameworks + job[:frameworks]).uniq,
+        other_tech_stack: (company.other_tech_stack + job[:other_tech_stack]).uniq,
+        countries: (company.countries + job[:countries]).uniq
+      }
+    end
 
-      def create_company(job)
-        {
-          name: job[:company_name],
-          url: job[:company_url],
-          programming_languages: job[:programming_languages],
-          frameworks: job[:frameworks],
-          other_tech_stack: job[:other_tech_stack],
-          countries: job[:countries]
-        }
-      end
+    def create_company(job)
+      {
+        name: job[:company_name],
+        url: job[:company_url],
+        programming_languages: job[:programming_languages],
+        frameworks: job[:frameworks],
+        other_tech_stack: job[:other_tech_stack],
+        countries: job[:countries]
+      }
     end
   end
 end
