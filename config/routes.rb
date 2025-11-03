@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get "pages/home"
   get "pages/careers"
   get "pages/download"
+  get "pages/export", to: "pages#export", defaults: { format: :csv }
   resources :companies
 
   # Stripe webhooks endpoint
