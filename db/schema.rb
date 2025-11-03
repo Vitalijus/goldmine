@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_02_195938) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_03_120334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -20,10 +20,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_02_195938) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "programming_languages", default: [], array: true
-    t.text "frameworks", default: [], array: true
-    t.text "other_tech_stack", default: [], array: true
-    t.text "countries", default: [], array: true
+    t.text "programming_languages", default: [], null: false, array: true
+    t.text "frameworks", default: [], null: false, array: true
+    t.text "other_tech_stack", default: [], null: false, array: true
+    t.text "countries", default: [], null: false, array: true
   end
 
   create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

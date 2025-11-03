@@ -25,6 +25,6 @@ module PagesHelper
   end
 
   def select_companies(countries)
-    Company.all.select { |c| (c.countries & countries).any? }
+    Company.where("countries && ARRAY[?]::text[]", countries)
   end
 end
