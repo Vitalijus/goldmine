@@ -49,10 +49,10 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-  
+
   # Testing framework
   gem "rspec-rails"
-  
+
   # ENV vars
   gem 'dotenv-rails'
 end
@@ -71,3 +71,14 @@ gem "tailwindcss-rails", "~> 4.3"
 
 # Payment provider
 gem 'stripe'
+
+# Client library
+gem "http"
+gem "httparty"
+gem 'open-uri'
+
+# Parse HTML
+gem 'nokogiri', '~> 1.18', '>= 1.18.10'
+
+# Parse JSON
+gem 'json', '~> 2.15', '>= 2.15.2'

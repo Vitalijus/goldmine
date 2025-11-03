@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  include PagesHelper
 
   # Only files allowed to download.
   # Each file corresponds to stripe product id.
@@ -20,6 +21,26 @@ class PagesController < ApplicationController
   def home
   end
 
+  def careers
+  end
+
+  # export sample CSV
+  def export
+    return unless params[:countries]
+    countries = params[:countries].map{ |country| country.downcase }
+    csv_data = companies_sample_file_helper(params[:countries])
+
+    respond_to do |format|
+      format.csv do
+        send_data csv_data,
+          filename: "#{countries.join("_")}_sample.csv",
+          type: "text/csv",
+          disposition: "attachment"  # forces download
+      end
+    end
+  end
+
+  # export companies list
   def download
     payment_id = params[:id]
     @payment = Payment.find_by(id: payment_id)
