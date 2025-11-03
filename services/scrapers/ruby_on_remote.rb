@@ -10,7 +10,7 @@ require_relative '../utils/tech_stack.rb'
 
 module Scrapers
   class RubyOnRemote
-    MAX_PAGES = 500
+    MAX_PAGES = 1
 
     def initialize(base_url)
       @base_url = base_url
@@ -22,7 +22,7 @@ module Scrapers
     def start
       @queue << @base_url
       crawl_queue
-      create_or_update_company
+      output_file
     end
 
     private
@@ -104,39 +104,50 @@ module Scrapers
       URI.join(base, href).to_s rescue href
     end
 
-    def create_or_update_company
+    def output_file
       puts "\n✅ Found #{@matched_links.size} job postings."
       return if @matched_links.empty?
 
-      @matched_links.each do |job|
-         company = Company.find_by(url: job[:company_url])
-
-         if company.present?
-           company.update(update_company(company, job))
-         else
-           Company.create!(create_company(job))
-         end
+      CSV.open("csv/rubyonremote.csv", "w", write_headers: true, headers: @matched_links.first.keys) do |csv|
+        @matched_links.each { |job| csv << job.values }
       end
+
+      puts "💾 Saved to csv/rubyonremote.csv"
     end
 
-    def update_company(company, job)
-      {
-        programming_languages: (company.programming_languages + job[:programming_languages]).uniq,
-        frameworks: (company.frameworks + job[:frameworks]).uniq,
-        other_tech_stack: (company.other_tech_stack + job[:other_tech_stack]).uniq,
-        countries: (company.countries + job[:countries]).uniq
-      }
-    end
-
-    def create_company(job)
-      {
-        name: job[:company_name],
-        url: job[:company_url],
-        programming_languages: job[:programming_languages],
-        frameworks: job[:frameworks],
-        other_tech_stack: job[:other_tech_stack],
-        countries: job[:countries]
-      }
-    end
+    # def create_or_update_company
+    #   puts "\n✅ Found #{@matched_links.size} job postings."
+    #   return if @matched_links.empty?
+    #
+    #   @matched_links.each do |job|
+    #      company = Company.find_by(url: job[:company_url])
+    #
+    #      if company.present?
+    #        company.update(update_company(company, job))
+    #      else
+    #        Company.create!(create_company(job))
+    #      end
+    #   end
+    # end
+    #
+    # def update_company(company, job)
+    #   {
+    #     programming_languages: (company.programming_languages + job[:programming_languages]).uniq,
+    #     frameworks: (company.frameworks + job[:frameworks]).uniq,
+    #     other_tech_stack: (company.other_tech_stack + job[:other_tech_stack]).uniq,
+    #     countries: (company.countries + job[:countries]).uniq
+    #   }
+    # end
+    #
+    # def create_company(job)
+    #   {
+    #     name: job[:company_name],
+    #     url: job[:company_url],
+    #     programming_languages: job[:programming_languages],
+    #     frameworks: job[:frameworks],
+    #     other_tech_stack: job[:other_tech_stack],
+    #     countries: job[:countries]
+    #   }
+    # end
   end
 end

@@ -1,8 +1,12 @@
 require 'csv'
 
 module PagesHelper
-  def companies_total_helper(countries)
+  def total_companies_by_country_helper(countries)
     select_companies(countries).count
+  end
+
+  def total_companies
+    Company.all.count
   end
 
   # generate CSV sample file
@@ -19,7 +23,7 @@ module PagesHelper
       }
     end
 
-    CSV.generate(write_headers: true, headers: company_hashes.first.keys) do |csv|
+    CSV.generate(write_headers: true, headers: company_hashes.first&.keys) do |csv|
       company_hashes.each { |company| csv << company.values }
     end
   end
