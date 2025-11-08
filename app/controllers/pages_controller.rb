@@ -9,7 +9,7 @@ class PagesController < ApplicationController
         stripe_product_id: ENV.fetch("STRIPE_PRODUCT_ID_USA")
       },
       {
-        country: "UK",
+        country: "GB",
         stripe_product_id: ENV.fetch("STRIPE_PRODUCT_ID_UK")
       },
       {
@@ -51,10 +51,11 @@ class PagesController < ApplicationController
     file_entry = ALLOWED_FILES.find do |entry|
       entry[:stripe_product_id] == stripe_product_id
     end
-    country = file_entry[:country]
-    csv_data = companies_export_file_helper(country)
 
     if file_entry
+      country = file_entry[:country]
+      csv_data = companies_export_file_helper(country)
+      
       respond_to do |format|
         format.csv do
           send_data csv_data,
