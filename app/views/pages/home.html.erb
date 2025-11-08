@@ -50,14 +50,18 @@
                   <span class="flex flex-col text-sm">
                     <span class="font-medium text-gray-900 dark:text-white">USA</span>
                     <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(companies_total_helper(["US"]), 'company') %></span>
-                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
-                      <span class="block sm:inline"><%= link_to "Download CSV", pages_export_path(format: :csv, countries: ["US"]), class: "btn btn-primary" %></span>
+                      <span class="block sm:inline"><%= pluralize(total_companies_by_country_helper(["US"]), 'company') %></span>
+                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
+                      <span class="block sm:inline">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </span>
                     </span>
                   </span>
                 </span>
                 <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                  <span class="font-medium text-gray-900 dark:text-white">$40</span>
+                  <span class="font-medium text-gray-900 dark:text-white">$10</span>
                 </span>
               </label>
               <label aria-label="United Kingdom" aria-description="List of companies powered by Ruby on Rails in the UK." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
@@ -66,14 +70,14 @@
                   <span class="flex flex-col text-sm">
                     <span class="font-medium text-gray-900 dark:text-white">United Kingdom</span>
                     <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(companies_total_helper(["GB"]), 'company') %></span>
-                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
-                      <span class="block sm:inline"><%= link_to "Download CSV", pages_export_path(format: :csv), class: "btn btn-primary" %></span>
+                      <span class="block sm:inline"><%= pluralize(total_companies_by_country_helper(["GB"]), 'company') %></span>
+                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
+                      <span class="block sm:inline"></span>
                     </span>
                   </span>
                 </span>
                 <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                  <span class="font-medium text-gray-900 dark:text-white">$80</span>
+                  <span class="font-medium text-gray-900 dark:text-white">$5</span>
                 </span>
               </label>
               <label aria-label="Canada" aria-description="List of companies powered by Ruby on Rails in Canada." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
@@ -82,14 +86,30 @@
                   <span class="flex flex-col text-sm">
                     <span class="font-medium text-gray-900 dark:text-white">Canada</span>
                     <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(companies_total_helper(["CA"]), 'company') %></span>
-                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline">&middot;</span>
-                      <span class="block sm:inline">sample_file.pdf</span>
+                      <span class="block sm:inline"><%= pluralize(total_companies_by_country_helper(["CA"]), 'company') %></span>
+                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
+                      <span class="block sm:inline"></span>
                     </span>
                   </span>
                 </span>
                 <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                  <span class="font-medium text-gray-900 dark:text-white">$240</span>
+                  <span class="font-medium text-gray-900 dark:text-white">$7</span>
+                </span>
+              </label>
+              <label aria-label="Australia" aria-description="List of companies powered by Ruby on Rails in Australia." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
+                <input type="radio" name="plan" value="australia" data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
+                <span class="flex items-center">
+                  <span class="flex flex-col text-sm">
+                    <span class="font-medium text-gray-900 dark:text-white">Australia(Stripe)</span>
+                    <span class="text-gray-500 dark:text-gray-400">
+                      <span class="block sm:inline"><%= pluralize(total_companies_by_country_helper(["AU"]), 'company') %></span>
+                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
+                      <span class="block sm:inline"></span>
+                    </span>
+                  </span>
+                </span>
+                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
+                  <span class="font-medium text-gray-900 dark:text-white">$5</span>
                 </span>
               </label>
             </div>
@@ -158,7 +178,7 @@
             </dt>
             <dd class="mt-4 flex flex-auto flex-col text-base/7 text-gray-600 dark:text-gray-400">
               <p class="flex-auto">
-                Delivered as a simple, well-structured CSV or PDF — ready to filter, import into your CRM, or use in your outreach campaigns.
+                Delivered as a simple, well-structured CSV — ready to filter, import into your CRM, or use in your outreach campaigns.
                 No scraping or messy exports required.
               </p>
             </dd>
@@ -201,12 +221,12 @@
         <dl class="mt-16 grid grid-cols-1 gap-0.5 overflow-hidden rounded-2xl text-center sm:grid-cols-2 lg:grid-cols-4">
           <div class="flex flex-col bg-gray-400/5 p-8 dark:bg-white/5">
             <dt class="text-sm/6 font-semibold text-gray-600 dark:text-gray-300">Companies in the database</dt>
-            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">12,500+</dd>
+            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white"><%= total_companies %></dd>
           </div>
 
           <div class="flex flex-col bg-gray-400/5 p-8 dark:bg-white/5">
             <dt class="text-sm/6 font-semibold text-gray-600 dark:text-gray-300">Rails projects analyzed</dt>
-            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">45,000+</dd>
+            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">500+</dd>
           </div>
 
           <div class="flex flex-col bg-gray-400/5 p-8 dark:bg-white/5">
@@ -216,7 +236,7 @@
 
           <div class="flex flex-col bg-gray-400/5 p-8 dark:bg-white/5">
             <dt class="text-sm/6 font-semibold text-gray-600 dark:text-gray-300">Countries covered</dt>
-            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">28+</dd>
+            <dd class="order-first text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">3</dd>
           </div>
         </dl>
       </div>
@@ -297,7 +317,7 @@
 
   <footer class="bg-white dark:bg-gray-900">
     <div class="mx-auto max-w-7xl overflow-hidden">
-      <p class="mt-10 text-center text-sm/6 text-gray-600 dark:text-gray-400">&copy; 2024 Your Company, Inc. All rights reserved.</p>
+      <p class="mt-10 text-center text-sm/6 text-gray-600 dark:text-gray-400">&copy; <%= Time.now.year %> Newbury Consulting LLC, Inc. All rights reserved.</p>
     </div>
   </footer>
 </div>

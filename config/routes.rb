@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "pages/home"
   get "pages/careers"
-  get "pages/download"
+  get "pages/download", to: "pages#download", defaults: { format: :csv }
   get "pages/export", to: "pages#export", defaults: { format: :csv }
   resources :companies
 
