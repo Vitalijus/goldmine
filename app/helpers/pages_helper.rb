@@ -16,10 +16,10 @@ module PagesHelper
       {
         name: company.name,
         url: company.url,
-        updated_at: company.updated_at,
+        updated_at: company.updated_at&.strftime("%F"),
         programming_languages: company.programming_languages.join(", "),
         frameworks: company.frameworks.join(", "),
-        countries: company.countries.join(", ")
+        countries: countries.join(", ")
       }
     end
 
@@ -29,16 +29,16 @@ module PagesHelper
   end
 
   # download CSV companies list file
-  def companies_export_file_helper(countries)
-    companies = select_companies(countries).sort_by(&:updated_at)
+  def companies_export_file_helper(country)
+    companies = select_companies(country).sort_by(&:updated_at)
     company_hashes = companies.map do |company|
       {
         name: company.name,
         url: company.url,
-        updated_at: company.updated_at,
+        updated_at: company.updated_at&.strftime("%F"),
         programming_languages: company.programming_languages.join(", "),
         frameworks: company.frameworks.join(", "),
-        countries: company.countries.join(", ")
+        countries: country
       }
     end
 

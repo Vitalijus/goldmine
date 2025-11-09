@@ -38,7 +38,7 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.csv do
         send_data csv_data,
-          filename: "#{countries.join("_")}_sample.csv",
+          filename: "ror_sample.csv",
           type: "text/csv",
           disposition: "attachment"  # forces download
       end
