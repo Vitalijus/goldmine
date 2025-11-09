@@ -1,5 +1,5 @@
 class PaymentMailer < ApplicationMailer
-    default from: "support@rorlist.com"
+    default from: "rorlist.com <support@rorlist.com>"
 
     def download_email(payment)
       @payment = payment
