@@ -36,7 +36,12 @@
         </div>
       </div>
 
-      <div data-controller="link-toggle">
+      <div data-controller="link-toggle"
+        data-link-toggle-usa-url-value="<%= ENV['STRIPE_PAYMENT_LINK_USA'] %>"
+        data-link-toggle-uk-url-value="<%= ENV['STRIPE_PAYMENT_LINK_UK'] %>"
+        data-link-toggle-canada-url-value="<%= ENV['STRIPE_PAYMENT_LINK_CANADA'] %>"
+        data-link-toggle-australia-url-value="<%= ENV['STRIPE_PAYMENT_LINK_AUSTRALIA'] %>"
+      >
         <div class="mx-auto mt-16 max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32">
           <div>
             <label for="email" class="mb-5 block text-sm/6 font-medium text-gray-900 dark:text-white">Select a Product</label>
