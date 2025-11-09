@@ -24,6 +24,8 @@ export default class extends Controller {
       link.href = "https://buy.stripe.com/test_cNibJ150q4K9gnE1Df8k802"
     } else if (selectedValue === "canada") {
       link.href = "https://buy.stripe.com/test_fZu6oH64u3G57R8fu58k803"
+    } else if (selectedValue === "australia") {
+      link.href = "https://buy.stripe.com/test_00wcN5csS1xX2wO4Pr8k804"
     } else {
       link.href = "#"
     }

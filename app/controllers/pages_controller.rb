@@ -15,6 +15,10 @@ class PagesController < ApplicationController
       {
         country: "CA",
         stripe_product_id: ENV.fetch("STRIPE_PRODUCT_ID_CANADA")
+      },
+      {
+        country: "AU",
+        stripe_product_id: ENV.fetch("STRIPE_PRODUCT_ID_AUSTRALIA")
       }
     ].freeze
 
@@ -55,7 +59,7 @@ class PagesController < ApplicationController
     if file_entry
       country = file_entry[:country]
       csv_data = companies_export_file_helper(country)
-      
+
       respond_to do |format|
         format.csv do
           send_data csv_data,
