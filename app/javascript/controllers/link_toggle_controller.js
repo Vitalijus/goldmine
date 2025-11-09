@@ -3,6 +3,12 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="link-toggle"
 export default class extends Controller {
   static targets = ["radio", "link"]
+  static values = {
+    usaUrl: String,
+    ukUrl: String,
+    canadaUrl: String,
+    australiaUrl: String
+  }
 
   connect() {
     console.log("LinkToggle controller connected")
@@ -19,13 +25,13 @@ export default class extends Controller {
     const link = this.linkTarget
 
     if (selectedValue === "usa") {
-      link.href = "https://buy.stripe.com/test_00w00jboOgsRdbs4Pr8k801"
+      link.href = this.usaUrlValue
     } else if (selectedValue === "united kingdom") {
-      link.href = "https://buy.stripe.com/test_cNibJ150q4K9gnE1Df8k802"
+      link.href = this.ukUrlValue
     } else if (selectedValue === "canada") {
-      link.href = "https://buy.stripe.com/test_fZu6oH64u3G57R8fu58k803"
+      link.href = this.canadaUrlValue
     } else if (selectedValue === "australia") {
-      link.href = "https://buy.stripe.com/test_00wcN5csS1xX2wO4Pr8k804"
+      link.href = this.australiaUrlValue
     } else {
       link.href = "#"
     }
