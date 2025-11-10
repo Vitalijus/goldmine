@@ -22,12 +22,17 @@
     <%= javascript_importmap_tags %>
 
     <!-- Needs to be below javascript_importmap_tags, otherwise Safari gives error -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
   </head>
 
   <body>
     <main>
       <%= yield %>
     </main>
+    <footer class="bg-white dark:bg-gray-900">
+      <div class="mx-auto max-w-7xl overflow-hidden">
+        <p class="mb-10 mt-10 text-center text-sm/6 text-gray-600 dark:text-gray-400">&copy; <%= Time.now.year %> Newbury Consulting LLC, Inc. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>

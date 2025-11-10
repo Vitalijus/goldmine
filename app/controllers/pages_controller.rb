@@ -25,9 +25,6 @@ class PagesController < ApplicationController
   def home
   end
 
-  def careers
-  end
-
   # export sample CSV
   def export
     return unless params[:countries]
