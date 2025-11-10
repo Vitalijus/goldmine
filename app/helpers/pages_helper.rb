@@ -6,7 +6,9 @@ module PagesHelper
   end
 
   def total_companies
-    Company.all.count
+    companies_count = Company.all.count
+    rounded_count = (companies_count / 10) * 10
+    "#{rounded_count}+"
   end
 
   # generate CSV sample file

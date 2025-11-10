@@ -1,0 +1,86 @@
+<%= form_with(model: career, class: "contents") do |form| %>
+  <% if career.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(career.errors.count, "error") %> prohibited this career from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% career.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:title].none?, "border-red-400 focus:outline-red-600": career.errors[:title].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :about_us %>
+    <%= form.textarea :about_us, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:about_us].none?, "border-red-400 focus:outline-red-600": career.errors[:about_us].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :about_role %>
+    <%= form.textarea :about_role, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:about_role].none?, "border-red-400 focus:outline-red-600": career.errors[:about_role].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :reqs %>
+    <%= form.textarea :reqs, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:reqs].none?, "border-red-400 focus:outline-red-600": career.errors[:reqs].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :our_culture %>
+    <%= form.textarea :our_culture, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:our_culture].none?, "border-red-400 focus:outline-red-600": career.errors[:our_culture].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :how_to_apply %>
+    <%= form.textarea :how_to_apply, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:description].none?, "border-red-400 focus:outline-red-600": career.errors[:how_to_apply].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :location %>
+    <%= form.text_field :location, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:location].none?, "border-red-400 focus:outline-red-600": career.errors[:location].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :employment_type %>
+    <%= form.select :employment_type,
+      [
+        "Full-time",
+        "Part-time",
+        "Contract",
+        "Freelance",
+        "Internship",
+        "Temporary",
+        "Seasonal",
+        "Volunteer",
+        "Apprenticeship"
+      ],
+      {}, # options hash (e.g. include_blank: "Select type")
+      class: [
+        "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full",
+        {
+          "border-gray-400 focus:outline-blue-600": career.errors[:employment_type].none?,
+          "border-red-400 focus:outline-red-600": career.errors[:employment_type].any?
+        }
+      ]
+    %>
+
+  <div class="my-5">
+    <%= form.label :salary_range %>
+    <%= form.text_field :salary_range, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": career.errors[:salary_range].none?, "border-red-400 focus:outline-red-600": career.errors[:salary_range].any?}] %>
+  </div>
+
+  <div class="my-5 flex items-center gap-2">
+    <%= form.label :active %>
+    <%= form.checkbox :active, class: ["block shadow-sm rounded-md border order-first h-5 w-5", {"border-gray-400 focus:outline-blue-600": career.errors[:active].none?, "border-red-400 focus:outline-red-600": career.errors[:active].any?}] %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
