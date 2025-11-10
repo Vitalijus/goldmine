@@ -1,10 +1,29 @@
 <% content_for :title, "Career Details" %>
 
 <% if notice.present? %>
-  <p class="py-2 px-4 bg-green-50 mb-6 text-green-600 font-medium rounded-md text-center"><%= notice %></p>
+  <div class="bg-white py-2 dark:bg-gray-900">
+    <p class="mx-auto mt-6 max-w-md text-center rounded-md bg-green-50 px-4 py-3 text-sm font-medium text-green-700 border border-green-200">
+        <%= notice %>
+    </p>
+  </div>
 <% end %>
 
-<div class="bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-gray-900">
+
+<div class="bg-white py-6 dark:bg-gray-900">
+  <div class="mx-auto max-w-4xl text-center">
+    <%= link_to root_url do %>
+      <svg enable-background="new 0 0 128 128" height="70px" id="Layer_1" version="1.1" viewBox="0 0 128 128" width="70px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <path fill="#F44336" d="M112.005,50.192h-96c-0.778,0-1.485-0.451-1.813-1.157s-0.217-1.538,0.284-2.132L37.5,19.595  c0.38-0.451,0.939-0.711,1.529-0.711h49.957c0.59,0,1.149,0.26,1.529,0.711l23.019,27.308c0.501,0.595,0.612,1.427,0.284,2.132  S112.783,50.192,112.005,50.192z M20.308,46.192h87.396L88.057,22.884H39.959L20.308,46.192z"/>
+        <polygon fill="#F44336" points="64.005,108.299 14.475,49.48 17.535,46.904 64.005,102.088 110.475,46.904 113.535,49.48 "/>
+        <path fill="#F44336" d="M64.005,107.193L64.005,107.193c-0.849,0-1.604-0.535-1.886-1.335L42.023,48.857c-0.221-0.625-0.117-1.317,0.275-1.851  l20.096-27.308c0.752-1.024,2.467-1.024,3.221,0l20.1,27.308c0.393,0.533,0.496,1.226,0.275,1.851l-20.1,57.001  C65.609,106.658,64.854,107.193,64.005,107.193z M46.147,48.525l17.857,50.654l17.861-50.654L64.005,24.258L46.147,48.525z"/>
+        <rect fill="#F44336" height="4" transform="matrix(0.1759 0.9844 -0.9844 0.1759 68.1737 -12.3602)" width="27.74" x="27.599" y="32.538"/>
+        <rect fill="#F44336" height="27.741" transform="matrix(0.9844 0.176 -0.176 0.9844 7.431 -14.695)" width="4" x="84.545" y="20.668"/>
+      </svg>
+    <% end %>
+  </div>
+</div>
+
+<div class="bg-white px-6 py-24 sm:py-20 lg:px-8 dark:bg-gray-900">
   <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl dark:text-white"><%= @career.title %></h2>
     <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
@@ -13,11 +32,11 @@
   </div>
 </div>
 
-<div class="bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-gray-900 mb-20">
+<div class="bg-white px-6 py-24 sm:py-2 lg:px-8 dark:bg-gray-900">
   <div class="mx-auto max-w-[900px] w-full overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800/50 dark:shadow-none dark:inset-ring dark:inset-ring-white/10">
     <div class="px-4 py-6 sm:px-6">
       <h3 class="text-base/7 font-semibold text-gray-900 dark:text-white">Role Information</h3>
-      <p class="mt-1 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-300">Here you will find comprehensive details regarding this role.</p>
+      <p class="mt-1 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-300">Below you will find comprehensive details regarding this role.</p>
     </div>
     <div class="border-t border-gray-100 dark:border-white/5">
       <dl class="divide-y divide-gray-100 dark:divide-white/5">
@@ -62,6 +81,6 @@
   </div>
 
   <div class="mt-10 text-center">
-    <%= link_to "Apply Now", "#", class: "inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg text-lg" %>
+    <%= link_to "Apply Now", new_career_applicant_path(@career), class: "inline-block px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-lg text-lg" %>
   </div>
 </div>

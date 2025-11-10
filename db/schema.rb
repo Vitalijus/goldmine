@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_10_100135) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_10_131740) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "applicants", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "career_id", null: false
+    t.string "name"
+    t.string "surname"
+    t.string "email"
+    t.string "phone"
+    t.string "country"
+    t.string "city"
+    t.string "linkedin_url"
+    t.string "github_url"
+    t.text "cover_letter"
+    t.string "expected_salary"
+    t.string "availability"
+    t.string "resume"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["career_id"], name: "index_applicants_on_career_id"
+  end
 
   create_table "careers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
@@ -50,4 +69,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_10_100135) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "applicants", "careers"
 end
