@@ -98,7 +98,7 @@
                 <label for="country-name" class="block text-sm/6 font-medium text-gray-900 dark:text-white"><%= form.label :country, "Country*" %></label>
                 <div class="mt-2 grid grid-cols-1 relative">
                   <%= form.select :country,
-                    [["United States", "United States"], ["Canada", "Canada"], ["Mexico", "Mexico"]],
+                    countries_in_aplha2,
                     { prompt: "Select a country" },
                     id: "country-name",
                     autocomplete: "country-name",
