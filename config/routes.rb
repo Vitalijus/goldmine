@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  # resources :applicants
   get "pages/home"
   get "pages/download", to: "pages#download", defaults: { format: :csv }
   get "pages/export", to: "pages#export", defaults: { format: :csv }
 
   resources :companies
-  # resources :careers
   resources :careers do
     resources :applicants, only: [:new, :create]
   end

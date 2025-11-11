@@ -1,5 +1,6 @@
 class CareersController < ApplicationController
   before_action :set_career, only: %i[ show edit update destroy ]
+  before_action :check_secret_key, only: [:new, :create, :edit, :update]
 
   # GET /careers or /careers.json
   def index
@@ -58,6 +59,14 @@ class CareersController < ApplicationController
   end
 
   private
+    # Protect some urls with a Secret Token, because auth like devise is not installed.
+    def check_secret_key
+      expected_key = Rails.application.credentials.admin_key! rescue ENV["ADMIN_KEY"]
+      unless params[:key] == expected_key
+        render plain: "Access denied", status: :unauthorized
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_career
       @career = Career.find(params.expect(:id))
