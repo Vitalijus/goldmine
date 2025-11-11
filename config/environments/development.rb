@@ -1,5 +1,7 @@
 require "active_support/core_ext/integer/time"
 
+Rails.application.routes.default_url_options[:host] = "http://localhost:3000"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -29,7 +31,7 @@ Rails.application.configure do
   config.cache_store = :memory_store
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -79,7 +81,7 @@ Rails.application.configure do
   #   subject: "Test email from Rails",
   #   body: "If you see this, your SMTP works!"
   # ).deliver_now
-  
+
   config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
@@ -90,5 +92,3 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 end
-
-

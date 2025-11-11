@@ -82,3 +82,6 @@ gem 'nokogiri', '~> 1.18', '>= 1.18.10'
 
 # Parse JSON
 gem 'json', '~> 2.15', '>= 2.15.2'
+
+# AWS
+gem "aws-sdk-s3", require: false
