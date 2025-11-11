@@ -7,6 +7,7 @@ class Applicant < ApplicationRecord
   after_commit :store_resume_url, on: [:create, :update]
 
   validates :name, :surname, :email, :country, :city, :resume, presence: true
+  validate :validate_resume
 
   private
 
@@ -15,6 +16,26 @@ class Applicant < ApplicationRecord
 
     url = Rails.application.routes.url_helpers.url_for(resume)
     update_column(:resume, url)
+  end
+
+  def validate_resume
+    return unless resume.attached?
+
+    # Validate file type
+    acceptable_types = [
+      "application/pdf",
+      "application/msword", # .doc
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" # .docx
+    ]
+
+    unless acceptable_types.include?(resume.content_type)
+      errors.add(:resume, "must be a PDF, DOC, or DOCX file")
+    end
+
+    # Validate file size (max 10 MB)
+    if resume.byte_size > 10.megabytes
+      errors.add(:resume, "is too large. Maximum size is 10 MB")
+    end
   end
 
   def send_new_applicant_email
