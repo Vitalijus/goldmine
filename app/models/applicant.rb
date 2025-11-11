@@ -1,10 +1,21 @@
 class Applicant < ApplicationRecord
   belongs_to :career
+  has_one_attached :resume
+
   # after_commit guarantees the job only runs after the Payment has been saved to the DB.
   after_commit :send_new_applicant_email, on: :create
-  validates :name, :surname, :email, :country, :city, presence: true # TO DO ad resume 
+  after_commit :store_resume_url, on: [:create, :update]
+
+  validates :name, :surname, :email, :country, :city, :resume, presence: true
 
   private
+
+  def store_resume_url # TO DO validate for pdf or doc file, and size
+    return unless resume.attached?
+
+    url = Rails.application.routes.url_helpers.url_for(resume)
+    update_column(:resume, url)
+  end
 
   def send_new_applicant_email
       # A known issue if mailer is set to async deliver_later it gives an error:
