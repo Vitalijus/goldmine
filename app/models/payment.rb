@@ -1,6 +1,4 @@
 class Payment < ApplicationRecord
-    # TO DO add validations
-
     # after_commit guarantees the job only runs after the Payment has been saved to the DB.
     after_commit :send_download_email, on: :create
 
