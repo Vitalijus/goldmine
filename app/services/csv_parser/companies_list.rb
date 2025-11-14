@@ -1,10 +1,10 @@
 require 'csv'
 
 # --- Run the parser ---
-# CsvParser::RubyOnRemote.new.run
+# CsvParser::CompaniesList.new("csv/weworkremotely.csv").run
 
 module CsvParser
-  class RubyOnRemote
+  class CompaniesList
     def initialize(companies_input="csv/rubyonremote.csv")
       @input_path = companies_input
     end
@@ -31,18 +31,16 @@ module CsvParser
     end
 
     def build_data(company)
-      countries = parse_json_array(company, "countries")
-      programming_languages = parse_json_array(company, "programming_languages")
-      frameworks = parse_json_array(company, "frameworks")
-      other_tech_stack = parse_json_array(company, "other_tech_stack")
-
       {
         company_name: company["company_name"],
         company_url: company["company_url"],
-        countries: countries,
-        programming_languages: programming_languages,
-        frameworks: frameworks,
-        other_tech_stack: other_tech_stack,
+        programming_languages: parse_json_array(company, "programming_languages"),
+        frameworks: parse_json_array(company, "frameworks"),
+        other_tech_stack: parse_json_array(company, "other_tech_stack"),
+        remote: parse_json_array(company, "remote"),
+        origin: company["origin"],
+        countries: parse_json_array(company, "countries"),
+        cities: parse_json_array(company, "cities")
       }
     end
 
@@ -60,7 +58,7 @@ module CsvParser
           end
         end
       rescue StandardError => e
-        Rails.logger.error("Could not create or update RubyOnRemote: #{e.message}")
+        Rails.logger.error("Could not create or update Company: #{e.message}")
         nil
       end
     end
@@ -70,7 +68,8 @@ module CsvParser
         programming_languages: (find_company.programming_languages + parse_json_array(company, "programming_languages")).uniq,
         frameworks: (find_company.frameworks + parse_json_array(company, "frameworks")).uniq,
         other_tech_stack: (find_company.other_tech_stack + parse_json_array(company, "other_tech_stack")).uniq,
-        countries: (find_company.countries + parse_json_array(company, "countries")).uniq
+        countries: (find_company.countries + parse_json_array(company, "countries")).uniq,
+        cities: (find_company.cities + parse_json_array(company, "cities")).uniq
       }
     end
 
@@ -81,7 +80,10 @@ module CsvParser
         programming_languages: parse_json_array(company, "programming_languages"),
         frameworks: parse_json_array(company, "frameworks"),
         other_tech_stack: parse_json_array(company, "other_tech_stack"),
-        countries: parse_json_array(company, "countries")
+        remote: parse_json_array(company, "remote"),
+        origin: company["origin"],
+        countries: parse_json_array(company, "countries"),
+        cities: parse_json_array(company, "cities")
       }
     end
 

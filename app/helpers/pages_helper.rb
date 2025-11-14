@@ -1,8 +1,14 @@
 require 'csv'
 
 module PagesHelper
-  def total_companies_by_country_helper(countries)
-    select_companies(countries).count
+  def total_by_country_language_framework_helper(countries, languages, frameworks)
+    companies = select_companies(countries)
+
+    companies.where(
+      "programming_languages && ARRAY[?]::text[] OR frameworks && ARRAY[?]::text[]",
+      languages,
+      frameworks
+    ).count
   end
 
   def total_companies
