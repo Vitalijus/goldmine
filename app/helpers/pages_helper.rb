@@ -37,8 +37,14 @@ module PagesHelper
   end
 
   # download CSV companies list file
-  def companies_export_file_helper(country)
-    companies = select_companies(country).sort_by(&:updated_at)
+  def companies_export_file_helper(country, languages, frameworks)
+    search_companies = select_companies(country).sort_by(&:updated_at)
+    companies = search_companies.where(
+      "programming_languages && ARRAY[?]::text[] OR frameworks && ARRAY[?]::text[]",
+      languages,
+      frameworks
+    ).count
+
     company_hashes = companies.map do |company|
       {
         name: company.name,

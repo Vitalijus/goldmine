@@ -55,7 +55,9 @@ class PagesController < ApplicationController
 
     if file_entry
       country = file_entry[:country]
-      csv_data = companies_export_file_helper(country)
+      languages = ["Ruby"]
+      frameworks = ["Ruby on Rails"]
+      csv_data = companies_export_file_helper(country, languages, frameworks)
 
       respond_to do |format|
         format.csv do
