@@ -19,7 +19,7 @@ module PagesHelper
 
   # generate CSV sample file
   def companies_sample_file_helper(countries)
-    companies = select_companies(countries).sort_by(&:updated_at).first(10)
+    companies = select_companies(countries).order(:updated_at).limit(10)
     company_hashes = companies.map do |company|
       {
         name: company.name,
@@ -43,7 +43,7 @@ module PagesHelper
       "programming_languages && ARRAY[?]::text[] OR frameworks && ARRAY[?]::text[]",
       languages,
       frameworks
-    ).sort_by(&:updated_at)
+    ).order(:updated_at)
 
     company_hashes = companies.map do |company|
       {
