@@ -1,5 +1,5 @@
 <div>
-  <div class="relative isolate overflow-hidden bg-white dark:bg-gray-900">
+  <div class="relative overflow-hidden bg-white dark:bg-gray-900">
     <svg aria-hidden="true" class="absolute inset-0 -z-10 size-full mask-[radial-gradient(100%_100%_at_top_right,white,transparent)] stroke-gray-200 dark:stroke-white/10">
       <defs>
         <pattern id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
@@ -36,96 +36,203 @@
         </div>
       </div>
 
-      <div data-controller="link-toggle"
-        data-link-toggle-usa-url-value="<%= ENV['STRIPE_PAYMENT_LINK_USA'] %>"
-        data-link-toggle-uk-url-value="<%= ENV['STRIPE_PAYMENT_LINK_UK'] %>"
-        data-link-toggle-canada-url-value="<%= ENV['STRIPE_PAYMENT_LINK_CANADA'] %>"
-        data-link-toggle-australia-url-value="<%= ENV['STRIPE_PAYMENT_LINK_AUSTRALIA'] %>"
-      >
-        <div class="mx-auto mt-16 max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32">
+      <div class="mx-auto mt-16 max-w-2xl sm:mt-24 lg:mt-0 lg:mr-0 lg:ml-10 lg:max-w-none lg:flex-none xl:ml-32">
+        <div class="bg-gray-100 py-24 sm:py-7 px-4 sm:px-6 lg:px-7 bg-white shadow-xs outline outline-gray-900/5 sm:rounded-xl md:col-span-2 dark:bg-gray-800/50 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
           <div>
-            <label for="email" class="mb-5 block text-sm/6 font-medium text-gray-900 dark:text-white">Select a Product</label>
+            <label for="email" class="mb-5 block w-full text-sm/6 font-medium text-gray-900 dark:text-white">
+              <!-- TO DO fix width of parent div, meanwhile use placeholder &nbsp; -->
+              Find companies hiring your stack &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
           </div>
 
-          <fieldset aria-label="List of companies">
-            <div class="space-y-4">
-              <label aria-label="USA" aria-description="List of companies powered by Ruby on Rails in USA." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
-                <input type="radio" name="plan" value="usa" checked data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
-                <span class="flex items-center">
-                  <span class="flex flex-col text-sm">
-                    <span class="font-medium text-gray-900 dark:text-white">USA</span>
-                    <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(total_by_country_language_framework_helper(["US"], ["Ruby"], ["Ruby on Rails"]), 'company') %></span>
-                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
-                      <span class="block sm:inline">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      </span>
-                    </span>
-                  </span>
-                </span>
-                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                  <span class="font-medium text-gray-900 dark:text-white">$10</span>
-                </span>
-              </label>
-              <label aria-label="United Kingdom" aria-description="List of companies powered by Ruby on Rails in the UK." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
-                <input type="radio" name="plan" value="united kingdom" data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
-                <span class="flex items-center">
-                  <span class="flex flex-col text-sm">
-                    <span class="font-medium text-gray-900 dark:text-white">United Kingdom</span>
-                    <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(total_by_country_language_framework_helper(["GB"], ["Ruby"], ["Ruby on Rails"]), 'company') %></span>
-                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
-                      <span class="block sm:inline"></span>
-                    </span>
-                  </span>
-                </span>
-                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                  <span class="font-medium text-gray-900 dark:text-white">$5</span>
-                </span>
-              </label>
-              <label aria-label="Canada" aria-description="List of companies powered by Ruby on Rails in Canada." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
-                <input type="radio" name="plan" value="canada" data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
-                <span class="flex items-center">
-                  <span class="flex flex-col text-sm">
-                    <span class="font-medium text-gray-900 dark:text-white">Canada</span>
-                    <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(total_by_country_language_framework_helper(["CA"], ["Ruby"], ["Ruby on Rails"]), 'company') %></span>
-                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
-                      <span class="block sm:inline"></span>
-                    </span>
-                  </span>
-                </span>
-                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                  <span class="font-medium text-gray-900 dark:text-white">$7</span>
-                </span>
-              </label>
-              <label aria-label="Australia" aria-description="List of companies powered by Ruby on Rails in Australia." class="group relative block rounded-lg border border-gray-300 bg-white px-6 py-4 has-checked:outline-2 has-checked:-outline-offset-2 has-checked:outline-indigo-600 has-focus-visible:outline-3 has-focus-visible:-outline-offset-1 sm:flex sm:justify-between dark:border-white/10 dark:bg-gray-800/50 dark:has-checked:outline-indigo-500">
-                <input type="radio" name="plan" value="australia" data-link-toggle-target="radio" data-action="change->link-toggle#updateLink" class="absolute inset-0 appearance-none focus:outline-none" />
-                <span class="flex items-center">
-                  <span class="flex flex-col text-sm">
-                    <span class="font-medium text-gray-900 dark:text-white">Australia</span>
-                    <span class="text-gray-500 dark:text-gray-400">
-                      <span class="block sm:inline"><%= pluralize(total_by_country_language_framework_helper(["AU"], ["Ruby"], ["Ruby on Rails"]), 'company') %></span>
-                      <span aria-hidden="true" class="hidden sm:mx-1 sm:inline"></span>
-                      <span class="block sm:inline"></span>
-                    </span>
-                  </span>
-                </span>
-                <span class="mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right">
-                  <span class="font-medium text-gray-900 dark:text-white">$5</span>
-                </span>
-              </label>
+          <%= form_with url: search_path, method: :post, local: true do |form| %>
+            <!-- Countries-->
+            <div class="col-span-full mb-4">
+              <select id="multiple-with-conditional-counter-select" name="countries[]" multiple="" data-hs-select='{
+                "hasSearch": true,
+                "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                "searchClasses": "block w-full sm:text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-1 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
+                "searchPlaceholder": "Search...",
+                "placeholder": "Countries",
+                "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+                "toggleSeparators": {
+                  "betweenItemsAndCounter": "&"
+                },
+                "toggleCountText": "+",
+                "toggleCountTextPlacement": "prefix-no-space",
+                "toggleCountTextMinItems": 3,
+                "toggleCountTextMode": "nItemsAndCount",
+                "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                "optionTemplate": "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+              }' class="hidden">
+                <option value="">Choose</option>
+
+                <% countries_list_helper.each do |country| %>
+                  <% # convert alpha2 to regional indicator symbols for emoji flag %>
+                  <% flag = country.alpha2.chars.map { |c| (c.ord + 127397).chr(Encoding::UTF_8) }.join %>
+                  <option value="<%= country.alpha2 %>" data-hs-select-option='{
+                    "icon": "<span class=\"text-lg\"><%= flag %></span>"
+                  }'>
+                    <%= country.common_name %>
+                  </option>
+                <% end %>
+              </select>
             </div>
 
-            <a data-link-toggle-target="link" href="#" target="_blank" rel="nofollow">
-              <button type="button" class="cursor-pointer mt-5 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Buy full list</button>
-            </a>
-            <p id="email-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400">Download <%= link_to "sample.csv", pages_export_path(format: :csv, countries: ["US", "GB", "CA", "AU"]), target: "_blank", class: "text-highligther btn btn-primary" %> and continue to get the full list by email.</p>
-          </fieldset>
+            <div class="col-span-full mb-4">
+              <select id="multiple-with-conditional-counter-select" name="programming_languages[]" multiple="" data-hs-select='{
+                "hasSearch": true,
+                "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                "searchClasses": "block w-full sm:text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-1 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
+                "searchPlaceholder": "Search...",
+                "placeholder": "Languages",
+                "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+                "toggleSeparators": {
+                  "betweenItemsAndCounter": "&"
+                },
+                "toggleCountText": "+",
+                "toggleCountTextPlacement": "prefix-no-space",
+                "toggleCountTextMinItems": 3,
+                "toggleCountTextMode": "nItemsAndCount",
+                "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                "optionTemplate": "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+              }' class="hidden">
+                <option value="">Choose</option>
+
+                <% programming_languages_list_helper.sort.each do |lang| %>
+                  <option value="<%= lang %>">
+                    <%= lang %>
+                  </option>
+                <% end %>
+              </select>
+            </div>
+
+            <div class="col-span-full mb-4">
+              <select id="multiple-with-conditional-counter-select" name="frameworks[]" multiple="" data-hs-select='{
+                "hasSearch": true,
+                "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                "searchClasses": "block w-full sm:text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-1 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
+                "searchPlaceholder": "Search...",
+                "placeholder": "Frameworks",
+                "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+                "toggleSeparators": {
+                  "betweenItemsAndCounter": "&"
+                },
+                "toggleCountText": "+",
+                "toggleCountTextPlacement": "prefix-no-space",
+                "toggleCountTextMinItems": 3,
+                "toggleCountTextMode": "nItemsAndCount",
+                "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                "optionTemplate": "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+              }' class="hidden">
+                <option value="">Choose</option>
+
+                <% frameworks_list_helper.sort.each do |framework| %>
+                  <option value="<%= framework %>">
+                    <%= framework %>
+                  </option>
+                <% end %>
+              </select>
+            </div>
+
+            <div class="col-span-full mb-4">
+              <select id="multiple-with-conditional-counter-select" name="other_tech_stack[]" multiple="" data-hs-select='{
+                "hasSearch": true,
+                "searchWrapperClasses": "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                "searchClasses": "block w-full sm:text-sm border-gray-200 rounded-lg focus:border-blue-500 focus:ring-blue-500 before:absolute before:inset-0 before:z-1 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 py-1.5 sm:py-2 px-3",
+                "searchPlaceholder": "Search...",
+                "placeholder": "Other tech",
+                "toggleTag": "<button type=\"button\" aria-expanded=\"false\"></button>",
+                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 ps-4 pe-9 flex gap-x-2 text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:focus:outline-hidden dark:focus:ring-1 dark:focus:ring-neutral-600",
+                "toggleSeparators": {
+                  "betweenItemsAndCounter": "&"
+                },
+                "toggleCountText": "+",
+                "toggleCountTextPlacement": "prefix-no-space",
+                "toggleCountTextMinItems": 3,
+                "toggleCountTextMode": "nItemsAndCount",
+                "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                "optionTemplate": "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+              }' class="hidden">
+                <option value="">Choose</option>
+
+                <% other_tech_stack_list_helper.sort.each do |tech| %>
+                  <option value="<%= tech %>">
+                    <%= tech %>
+                  </option>
+                <% end %>
+              </select>
+            </div>
+
+            <%= form.submit "Search", class: "w-full rounded-md bg-indigo-600 px-3.5 py-2.5
+                                   text-sm font-semibold text-white shadow-xs
+                                   hover:bg-indigo-500 focus-visible:outline-2
+                                   focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+                                   dark:bg-indigo-500 dark:hover:bg-indigo-400
+                                   cursor-pointer" %>
+
+          <% end %>
         </div>
       </div>
+    </div>
+
+    <!-- List of records -->
+    <div class="bg-white pt-5 pb-32 sm:pt-5 sm:pb-32 dark:bg-gray-900">
+      <ul role="list" class="mx-auto max-w-7xl divide-y divide-gray-100 overflow-hidden bg-white shadow-xs outline-1 outline-gray-900/5 sm:rounded-xl dark:divide-white/5 dark:bg-gray-800/50 dark:shadow-none dark:outline-white/10 dark:sm:-outline-offset-1">
+        <div class="border-b border-gray-200 px-4 py-5 sm:px-6 dark:border-white/10">
+          <div class="-mt-2 -ml-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
+            <div class="mt-2 ml-4">
+              <h3 class="text-base font-semibold text-gray-900 dark:text-white">Top 5 Countries</h3>
+            </div>
+            <div class="mt-2 ml-4 shrink-0">
+              <button type="button" class="relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Download sample.csv</button>
+            </div>
+          </div>
+        </div>
+
+        <% @companies.first(5).each do |company| %>
+          <li class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6 dark:hover:bg-white/2.5">
+            <div class="flex min-w-0 gap-x-4">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-12 flex-none rounded-full bg-gray-50 dark:bg-gray-800 dark:outline dark:-outline-offset-1 dark:outline-white/10" />
+              <div class="min-w-0 flex-auto">
+                <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">
+                  <a href="#">
+                    <span class="absolute inset-x-0 -top-px bottom-0"></span>
+                    United States
+                  </a>
+                </p>
+                <p class="mt-1 flex text-xs/5 text-gray-500 dark:text-gray-400">
+                  10 companies
+                </p>
+              </div>
+            </div>
+            <div class="flex shrink-0 items-center gap-x-4">
+              <div class="hidden sm:flex sm:flex-col sm:items-end">
+                <p class="text-sm/6 text-gray-900 dark:text-white">$100</p>
+                <p class="mt-1 text-xs/5 text-gray-500 dark:text-gray-400">
+                  Last seen <time datetime="2023-01-23T13:23Z">3h ago</time>
+                </p>
+              </div>
+              <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 flex-none text-gray-400 dark:text-gray-500">
+                <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+              </svg>
+            </div>
+          </li>
+        <% end %>
+      </ul>
     </div>
 
     <div class="flex items-center">

@@ -4,6 +4,8 @@ class Payment < ApplicationRecord
 
     private
 
+    
+
     def send_download_email
         # A known issue if mailer is set to async deliver_later it gives an error:
         # PG::UndefinedTable: ERROR:  relation "solid_queue_processes"

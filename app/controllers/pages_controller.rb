@@ -23,6 +23,16 @@ class PagesController < ApplicationController
     ].freeze
 
   def home
+    @companies = Company.all
+  end
+
+  def search
+    # binding.pry
+    params[:countries]
+    params[:frameworks]
+    params[:programming_languages]
+    params[:other_tech_stack]
+    redirect_to root_path, notice: "Search submitted!"
   end
 
   # export sample CSV
