@@ -64,4 +64,13 @@ module PagesHelper
   def select_companies(countries)
     Company.where("countries && ARRAY[?]::text[]", countries)
   end
+
+  def flag_for_country_name_helper(name)
+    country = ISO3166::Country.find_country_by_any_name(name)
+    return "" unless country&.alpha2
+
+    country.alpha2.chars
+           .map { |c| (c.ord + 127397).chr(Encoding::UTF_8) }
+           .join
+  end
 end

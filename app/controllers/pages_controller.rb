@@ -23,11 +23,10 @@ class PagesController < ApplicationController
     ].freeze
 
   def home
-    @companies = Company.all
+    @top_countries = Opensearch::TopCountriesQuery.new.build_result
   end
 
   def search
-    # binding.pry
     params[:countries]
     params[:frameworks]
     params[:programming_languages]
