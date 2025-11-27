@@ -47,7 +47,7 @@
             </label>
           </div>
 
-          <%= form_with url: search_path, method: :post, local: true do |form| %>
+          <%= form_with url: search_path, method: :get, local: true do |form| %>
             <!-- Countries-->
             <div class="col-span-full mb-4">
               <select id="multiple-with-conditional-counter-select" name="countries[]" multiple="" data-hs-select='{

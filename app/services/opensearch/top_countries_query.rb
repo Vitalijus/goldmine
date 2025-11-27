@@ -1,17 +1,12 @@
 require_relative "../utils/pricing"
 
 module Opensearch
-  class TopCountriesQuery
+  class TopCountriesQuery < Base
     include Pricing
 
-    def response
-      OPENSEARCH_CLIENT.search(
-        index: Company::INDEX_NAME,
-        body: query
-      )
-    end
-
     def build_result
+      response = response(Company::INDEX_NAME, query)
+
       response.dig("aggregations", "aggregate_by_country", "buckets").map do |bucket|
         price = Pricing.price_rates.select { |item| item[:total_companies].include?(bucket["doc_count"]) }
 

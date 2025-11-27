@@ -27,11 +27,14 @@ class PagesController < ApplicationController
   end
 
   def search
-    params[:countries]
-    params[:frameworks]
-    params[:programming_languages]
-    params[:other_tech_stack]
-    redirect_to root_path, notice: "Search submitted!"
+    get_countries = Opensearch::GetCountriesQuery.new(
+                                                        countries: params[:countries],
+                                                        frameworks: params[:frameworks],
+                                                        languages: params[:programming_languages],
+                                                        other_tech: params[:other_tech_stack],
+                                                        size: 300
+                                                      )
+    @countries = get_countries.build_result
   end
 
   # export sample CSV
