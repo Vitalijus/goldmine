@@ -32,7 +32,7 @@ class PagesController < ApplicationController
                                                         frameworks: params[:frameworks],
                                                         languages: params[:programming_languages],
                                                         other_tech: params[:other_tech_stack],
-                                                        size: 300
+                                                        remote: params[:remote]
                                                       )
     @countries = get_countries.build_result
   end

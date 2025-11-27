@@ -31,7 +31,10 @@ class Company < ApplicationRecord
       other_tech_stack: other_tech_stack,           # array of strings
       cities: cities,                               # array of strings
       remote: remote,
-      origin: origin
+      origin: origin,
+      created_at: created_at,
+      updated_at: updated_at
+
     }
   end
 

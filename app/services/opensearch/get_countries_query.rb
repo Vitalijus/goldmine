@@ -4,11 +4,12 @@ module Opensearch
   class GetCountriesQuery < Base
     include Pricing
 
-    def initialize(countries:, languages:, frameworks:, other_tech:, size: 5)
+    def initialize(countries:, languages:, frameworks:, other_tech:, remote:, size: 300)
       @countries = countries || ISO3166::Country.codes
       @languages = languages
       @frameworks = frameworks
       @other_tech = other_tech
+      @remote = remote
       @size = size
     end
 
@@ -38,6 +39,7 @@ module Opensearch
       {
         query: {
           bool: {
+            must: must_query,
             filter: query_filter
           }
         },
@@ -53,13 +55,17 @@ module Opensearch
       }
     end
 
+    def must_query
+      filter = []
+      filter << { term: { remote: @remote } } if @remote.present?
+    end
+
     def query_filter
       filter = []
       filter << { terms: { "countries.keyword": @countries } }             if @countries.present?
       filter << { terms: { "programming_languages.keyword": @languages } } if @languages.present?
       filter << { terms: { "frameworks.keyword": @frameworks } }           if @frameworks.present?
       filter << { terms: { "other_tech_stack.keyword": @other_tech } }     if @other_tech.present?
-      # filter << { term: { "remote.keyword": "red"   }}
       filter
     end
   end
