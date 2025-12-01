@@ -37,6 +37,20 @@ class PagesController < ApplicationController
     @countries = get_countries.build_result
   end
 
+  def checkout
+    if params[:country].present? && params[:stripe_payment_link].present?
+      payment = Payment.create(countries: [params[:country]],
+                               programming_languages: params[:programming_languages] || [],
+                               frameworks: params[:frameworks] || [],
+                               other_tech_stack: params[:other_tech_stack] || [],
+                               remote: nil) # TO DO
+
+      redirect_to params[:stripe_payment_link] + "?client_reference_id=#{payment.id}", allow_other_host: true if payment
+    else
+      redirect_back(fallback_location: search_path, alert: "Redirect to checkout is unsuccessfull.")
+    end
+  end
+
   # export sample CSV
   def export
     return unless params[:countries]
@@ -47,7 +61,7 @@ class PagesController < ApplicationController
     respond_to do |format|
       format.csv do
         send_data csv_data,
-          filename: "ror_sample.csv",
+          filename: "sample.csv",
           type: "text/csv",
           disposition: "attachment"  # forces download
       end

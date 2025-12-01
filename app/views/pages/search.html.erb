@@ -1,3 +1,9 @@
+<% if alert.present? %>
+  <div class="text-center w-full bg-white pt-5 pb-32 sm:pt-5 sm:pb-0 dark:bg-gray-900">
+    <p class="py-2 px-3 bg-green-50 mb-5 text-red-500 font-medium rounded-md inline-block" id="notice"><%= alert %></p>
+  </div>
+<% end %>
+
 <div class="bg-white py-24 sm:py-18 dark:bg-gray-900">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl lg:mx-0">
@@ -153,7 +159,7 @@
           <div class="sm:col-span-3">
             <%= form.label :remote, "Remote", class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
             <div class="mt-2 grid grid-cols-1">
-              <%= form.select :remote, options_for_select([["Yes", true], ["No", false]], params[:remote]), { include_blank: "Select..." }, class: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500" %>
+              <%= form.select :remote, options_for_select([["Yes", true], ["No", false]], params[:remote].presence), { prompt: "Select..." }, class: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800 dark:focus:outline-indigo-500" %>
               <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
                 <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
               </svg>
@@ -195,10 +201,17 @@
           <%= flag_for_country_name_helper(country[:country]) %>
           <div class="min-w-0 flex-auto">
             <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">
-              <a href="<%= country[:stripe_payment_link] %>" target="_blank" rel="noopener noreferrer">
+              <%= link_to checkout_path(stripe_payment_link: country[:stripe_payment_link],
+                                        country: country[:country],
+                                        programming_languages: params[:programming_languages],
+                                        frameworks: params[:frameworks],
+                                        other_tech_stack: params[:other_tech_stack],
+                                        remote: params[:remote]),
+                                        target: "_blank",
+                                        rel: "noopener noreferrer" do %>
                 <span class="absolute inset-x-0 -top-px bottom-0"></span>
                 <%= country[:country] %>
-              </a>
+              <% end %>
             </p>
             <p class="mt-1 flex text-xs/5 text-gray-500 dark:text-gray-400">
               <%= pluralize(country[:total_companies], "company") %>
