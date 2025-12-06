@@ -1,5 +1,5 @@
 module Opensearch
-  class TopCompaniesQuery
+  class CompaniesToCsvQuery
 
     def response
       search_body = {

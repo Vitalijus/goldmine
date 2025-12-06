@@ -31,8 +31,13 @@ module Opensearch
         country: ISO3166::Country.new(bucket["key"]).common_name,
         total_companies: bucket["doc_count"],
         price: price.first[:price],
-        stripe_payment_link: price.first[:stripe_payment_link]
+        stripe_payment_link: price.first[:stripe_payment_link],
+        popular_languages: popular_languages(bucket)
       }
+    end
+
+    def popular_languages(bucket)
+      bucket.dig("popular_languages_aggs", "buckets").map{ |bucket| bucket["key"] }
     end
 
     def query
@@ -49,6 +54,14 @@ module Opensearch
             terms: {
               field: "countries.keyword",
               size: @size
+            },
+            aggs: {
+              popular_languages_aggs: {
+                terms: {
+                  field: "programming_languages.keyword",
+                  size: 3
+                }
+              }
             }
           }
         }
