@@ -4,10 +4,15 @@ module Opensearch
   class TopCountriesQuery < Base
     include Pricing
 
+    def initialize(countries: ["US", "GB", "CA", "DE", "AU"])
+      @countries = countries
+    end
+
     def build_result
       response = response(Company::INDEX_NAME, query)
 
-      response.dig("aggregations", "aggregate_by_country", "buckets").map do |bucket|
+      total_countries = response.dig("aggregations", "aggregate_by_country", "buckets").map do |bucket|
+        next unless @countries.include?(bucket["key"])
         price = Pricing.price_rates.select { |item| item[:total_companies].include?(bucket["doc_count"]) }
 
         {
@@ -15,9 +20,11 @@ module Opensearch
           total_companies: bucket["doc_count"],
           price: price.first[:price],
           stripe_payment_link: price.first[:stripe_payment_link],
-          popular_languages: popular_languages(bucket)
+          popular_languages: popular_languages(bucket)&.join(", ")
         }
       end
+
+      total_countries.compact
     end
 
     def popular_languages(bucket)
@@ -34,7 +41,7 @@ module Opensearch
           aggregate_by_country: {
             terms: {
               field: "countries.keyword",
-              size: 5
+              size: 300
             },
             aggs: {
               popular_languages_aggs: {
@@ -48,6 +55,5 @@ module Opensearch
         }
       }
     end
-
   end
 end

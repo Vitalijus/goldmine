@@ -32,7 +32,7 @@ module Opensearch
         total_companies: bucket["doc_count"],
         price: price.first[:price],
         stripe_payment_link: price.first[:stripe_payment_link],
-        popular_languages: popular_languages(bucket)
+        popular_languages: popular_languages(bucket)&.join(", ")
       }
     end
 
