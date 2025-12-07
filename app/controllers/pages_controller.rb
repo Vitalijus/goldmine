@@ -16,11 +16,11 @@ class PagesController < ApplicationController
 
   def checkout
     if params[:country].present? && params[:stripe_payment_link].present?
-      payment = Payment.create(countries: [params[:country]],
+      payment = Payment.create(countries: [ISO3166::Country.find_country_by_any_name(params[:country]).alpha2],
                                programming_languages: params[:programming_languages] || [],
                                frameworks: params[:frameworks] || [],
                                other_tech_stack: params[:other_tech_stack] || [],
-                               remote: nil) # TO DO
+                               remote: params[:remote] || nil )
 
       redirect_to params[:stripe_payment_link] + "?client_reference_id=#{payment.id}", allow_other_host: true if payment
     else
@@ -47,24 +47,38 @@ class PagesController < ApplicationController
 
   # export companies list
   def download
-    return unless params[:id]
+    begin
+      # Ensure :id param exists
+      return render plain: "Missing download ID.", status: :bad_request unless params[:id].present?
 
-    payment_id = params[:id]
-    @payment = Payment.find_by(id: payment_id)
+      payment_id = params[:id]
+      @payment = Payment.find_by(id: payment_id)
 
-    if @payment
-      csv_data = companies_export_file_helper(@payment)
+      # Handle missing payment
+      return render plain: "File not found. Please contact support.", status: :not_found unless @payment
 
+      # Safely generate CSV (rescue inside block)
+      csv_data = begin
+        companies_export_file_helper(@payment)
+      rescue => e
+        Rails.logger.error "CSV generation failed: #{e.class} - #{e.message}"
+        return render plain: "Unable to generate file. Please contact support.", status: :internal_server_error
+      end
+
+      # Send CSV normally
       respond_to do |format|
         format.csv do
           send_data csv_data,
             filename: "companies_list.csv",
             type: "text/csv",
-            disposition: "attachment"  # forces download
+            disposition: "attachment"
         end
       end
-    else
-      render plain: "File not found. Please contact support.", status: :not_found
+
+    rescue => e
+      # Catch any unexpected errors
+      Rails.logger.error "Download error: #{e.class} - #{e.message}"
+      render plain: "An error occurred. Please try again or contact support.", status: :internal_server_error
     end
   end
 end

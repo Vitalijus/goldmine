@@ -2,7 +2,7 @@ module Opensearch
   class CompaniesToCsvQuery < Base
 
     def initialize(countries:, languages:, frameworks:, other_tech:, remote:, size: 1000)
-      @countries = ["US"]#countries #ISO3166::Country.find_country_by_any_name(countries.first).alpha2
+      @countries = countries
       @languages = languages
       @frameworks = frameworks
       @other_tech = other_tech
@@ -45,6 +45,7 @@ module Opensearch
     def must_query
       filter = []
       filter << { term: { remote: @remote } } if @remote.present?
+      filter
     end
 
     def query_filter

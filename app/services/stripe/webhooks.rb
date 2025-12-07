@@ -58,6 +58,7 @@ class Stripe::Webhooks
             remote: nil,
           )
 
+          # TO DO delete params Payment
           Rails.logger.info("=================== Event type: checkout.session.completed ==================")
         else
           Rails.logger.error("=================== Event type ERROR: checkout.session.completed ==================")

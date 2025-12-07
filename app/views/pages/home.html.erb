@@ -244,10 +244,13 @@
             <%= flag_for_country_name_helper(country[:country]) %>
             <div class="min-w-0 flex-auto">
               <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">
-                <a href="<%= country[:stripe_payment_link] %>" target="_blank" rel="noopener noreferrer">
+                <%= link_to checkout_path(stripe_payment_link: country[:stripe_payment_link],
+                                          country: country[:country]),
+                                          target: "_blank",
+                                          rel: "noopener noreferrer" do %>
                   <span class="absolute inset-x-0 -top-px bottom-0"></span>
                   <%= country[:country] %>
-                </a>
+                <% end %>
               </p>
               <p class="mt-1 flex text-xs/5 text-gray-500 dark:text-gray-400">
                 <%= pluralize(country[:total_companies], "company") %>
