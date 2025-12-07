@@ -1,50 +1,59 @@
 module Opensearch
-  class CompaniesToCsvQuery
+  class CompaniesToCsvQuery < Base
 
-    def response
-      search_body = {
-        query: {
-          bool: {
-            must: [],
-            filter: [
-              # { terms: { "countries.keyword": ["US"] } },
-              # { terms: { "programming_languages.keyword": ["Ruby"] } },
-              # { terms: { "frameworks.keyword": [] } },
-              # { terms: { "other_tech_stack.keyword": [] } }
-            ]
-          }
-        },
-        size: 0,
-        aggs: {
-          aggregate_by_country: {
-            terms: {
-              field: "countries.keyword",
-              size: 5
-            }
-          },
-          # top_countries_hits: {
-          #   top_hits: {
-          #     size: 100 # TO DO Need to add paging
-          #     # sort: [
-          #     #   {
-          #     #     created_at: {
-          #     #       order: "DESC"
-          #     #     }
-          #     #   }
-          #     # ],
-          #     # _source: {
-          #     #   includes: [ "name", "url", "countries" ]
-          #     # }
-          #   }
-          # }
-        }
-      }
-
-      response = OPENSEARCH_CLIENT.search(
-        index: "companies", #Company::INDEX_NAME,
-        body: search_body
-      )
+    def initialize(countries:, languages:, frameworks:, other_tech:, remote:, size: 1000)
+      @countries = ["US"]#countries #ISO3166::Country.find_country_by_any_name(countries.first).alpha2
+      @languages = languages
+      @frameworks = frameworks
+      @other_tech = other_tech
+      @remote = remote
+      @size = size
     end
 
+    def build_result
+      response = response(Company::INDEX_NAME, query)
+
+      response.dig("hits", "hits").map do |company|
+        source = company["_source"]
+        company_attrs(source)
+      end
+    end
+
+    def company_attrs(source)
+      {
+        name: source["name"],
+        url: source["url"],
+        updated_at: source["updated_at"]&.to_time&.strftime("%F"),
+        programming_languages: source["programming_languages"]&.join(", "),
+        frameworks: source["frameworks"]&.join(", "),
+        countries: @countries&.join(", ")
+      }
+    end
+
+    def query
+      {
+        query: {
+          bool: {
+            must: must_query,
+            filter: query_filter
+          }
+        },
+        size: @size
+      }
+    end
+
+    def must_query
+      filter = []
+      filter << { term: { remote: @remote } } if @remote.present?
+    end
+
+    def query_filter
+      filter = []
+      filter << { terms: { "countries.keyword": @countries } }             if @countries.present?
+      filter << { terms: { "programming_languages.keyword": @languages } } if @languages.present?
+      filter << { terms: { "frameworks.keyword": @frameworks } }           if @frameworks.present?
+      filter << { terms: { "other_tech_stack.keyword": @other_tech } }     if @other_tech.present?
+      filter
+    end
   end
 end
