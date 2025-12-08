@@ -32,7 +32,7 @@ class Stripe::Webhooks
         amount = data&.object&.amount
         stripe_product_id = data&.object&.payment_details&.order_reference
         client_email = data&.object&.charges&.data&.first&.billing_details&.email
-
+      
         Payment.create(
           stripe_payment_intent: stripe_payment_intent,
           amount: amount,
@@ -49,16 +49,16 @@ class Stripe::Webhooks
         payment = Payment.find_by(stripe_payment_intent: stripe_payment_intent)
 
         if params && payment
-          payment.update(
+          update_payment = payment.update(
             countries: params[:countries] || [],
             cities: params[:cities] || [],
             programming_languages: params[:programming_languages] || [],
             frameworks: params[:frameworks] || [],
             other_tech_stack: params[:other_tech_stack] || [],
-            remote: nil,
+            remote: params[:remote] || nil
           )
 
-          # TO DO delete params Payment
+          params.delete if update_payment
           Rails.logger.info("=================== Event type: checkout.session.completed ==================")
         else
           Rails.logger.error("=================== Event type ERROR: checkout.session.completed ==================")

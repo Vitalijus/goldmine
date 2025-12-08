@@ -53,7 +53,7 @@ class PagesController < ApplicationController
 
       payment_id = params[:id]
       @payment = Payment.find_by(id: payment_id)
-
+      
       # Handle missing payment
       return render plain: "File not found. Please contact support.", status: :not_found unless @payment
 

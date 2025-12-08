@@ -44,7 +44,7 @@ module Opensearch
 
     def must_query
       filter = []
-      filter << { term: { remote: @remote } } if @remote.present?
+        filter << { term: { remote: @remote } } unless @remote.nil?
       filter
     end
 
