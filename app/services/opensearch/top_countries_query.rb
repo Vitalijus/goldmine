@@ -2,7 +2,7 @@ require_relative "../utils/pricing"
 
 module Opensearch
   class TopCountriesQuery < Base
-    include Pricing
+    include Utils::Pricing
 
     def initialize(countries: ["US", "GB", "CA", "DE", "AU"])
       @countries = countries
@@ -13,7 +13,7 @@ module Opensearch
 
       total_countries = response.dig("aggregations", "aggregate_by_country", "buckets").map do |bucket|
         next unless @countries.include?(bucket["key"])
-        price = Pricing.price_rates.select { |item| item[:total_companies].include?(bucket["doc_count"]) }
+        price = Utils::Pricing.price_rates.select { |item| item[:total_companies].include?(bucket["doc_count"]) }
 
         {
           country: ISO3166::Country.new(bucket["key"]).common_name,
