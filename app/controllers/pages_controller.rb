@@ -22,9 +22,13 @@ class PagesController < ApplicationController
                                other_tech_stack: params[:other_tech_stack] || [],
                                remote: params[:remote] || nil )
 
-      redirect_to params[:stripe_payment_link] + "?client_reference_id=#{payment.id}", allow_other_host: true if payment
+      if params[:stripe_payment_link].start_with?("https://buy.stripe.com/") && payment
+        redirect_to params[:stripe_payment_link] + "?client_reference_id=#{payment.id}", allow_other_host: true
+      else
+        redirect_back(fallback_location: search_path, alert: "Wrong redirect url. Please contact support.")
+      end
     else
-      redirect_back(fallback_location: search_path, alert: "Redirect to checkout is unsuccessfull.")
+      redirect_back(fallback_location: search_path, alert: "Redirect to checkout is unsuccessfull. Please contact support.")
     end
   end
 
@@ -53,7 +57,7 @@ class PagesController < ApplicationController
 
       payment_id = params[:id]
       @payment = Payment.find_by(id: payment_id)
-      
+
       # Handle missing payment
       return render plain: "File not found. Please contact support.", status: :not_found unless @payment
 
