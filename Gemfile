@@ -85,3 +85,9 @@ gem 'json', '~> 2.15', '>= 2.15.2'
 
 # AWS
 gem "aws-sdk-s3", require: false
+
+# Countries list alpha2
+gem 'countries', require: 'countries/global'
+
+# OpenSearch
+gem "opensearch-ruby", "~> 3.4"

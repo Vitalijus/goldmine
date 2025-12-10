@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get "pages/home"
+  get "search", to: "pages#search"
+  get "checkout", to: "pages#checkout"
   get "pages/download", to: "pages#download", defaults: { format: :csv }
   get "pages/export", to: "pages#export", defaults: { format: :csv }
 

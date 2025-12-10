@@ -37,31 +37,29 @@ module PagesHelper
   end
 
   # download CSV companies list file
-  def companies_export_file_helper(country, languages, frameworks)
-    search_companies = select_companies(country)
-    companies = search_companies.where(
-      "programming_languages && ARRAY[?]::text[] OR frameworks && ARRAY[?]::text[]",
-      languages,
-      frameworks
-    ).sort_by(&:updated_at)
+  def companies_export_file_helper(payment)
+    companies = Opensearch::CompaniesToCsvQuery.new(countries: payment.countries,
+                                        languages: payment.programming_languages,
+                                        frameworks: payment.frameworks,
+                                        other_tech: payment.other_tech_stack,
+                                        remote: payment.remote)
+    csv_data = companies.build_result
 
-    company_hashes = companies.map do |company|
-      {
-        name: company.name,
-        url: company.url,
-        updated_at: company.updated_at&.strftime("%F"),
-        programming_languages: company.programming_languages.join(", "),
-        frameworks: company.frameworks.join(", "),
-        countries: country
-      }
-    end
-
-    CSV.generate(write_headers: true, headers: company_hashes.first&.keys) do |csv|
-      company_hashes.each { |company| csv << company.values }
+    CSV.generate(write_headers: true, headers: csv_data.first&.keys) do |csv|
+      csv_data.each { |company| csv << company.values }
     end
   end
 
   def select_companies(countries)
     Company.where("countries && ARRAY[?]::text[]", countries)
+  end
+
+  def flag_for_country_name_helper(name)
+    country = ISO3166::Country.find_country_by_any_name(name)
+    return "" unless country&.alpha2
+
+    country.alpha2.chars
+           .map { |c| (c.ord + 127397).chr(Encoding::UTF_8) }
+           .join
   end
 end

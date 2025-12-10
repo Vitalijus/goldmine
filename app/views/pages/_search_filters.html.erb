@@ -1,0 +1,154 @@
+<!-- Search -->
+  <div class="bg-gray-100 py-24 sm:py-7 px-4 sm:px-6 lg:px-7 bg-white shadow-xs outline outline-gray-900/5 sm:rounded-xl md:col-span-2 dark:bg-gray-800/50 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+    <div>
+      <label for="email" class="mb-5 block w-full text-sm/6 font-medium text-gray-900 dark:text-white">
+        FILTERS
+      </label>
+    </div>
+
+    <%= form_with url: search_path, method: :get, local: true, data: { turbo: false } do |form| %>
+      <!-- Countries-->
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-2">
+          <%= form.label :countries, "Countries", class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= form.select :countries,
+                options_for_select(countries_list_helper.map { |c| ["#{c.common_name}", c.alpha2] }, params[:countries]),
+                { multiple: true,
+                include_hidden: false },
+                class: "hidden",
+                data: { hs_select: {
+                  hasSearch: true,
+                  searchWrapperClasses: "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                  searchClasses: "block w-full sm:text-sm appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500",
+                  searchPlaceholder: "Search...",
+                  toggleTag: "<button type=\"button\" aria-expanded=\"false\"></button>",
+                  toggleClasses: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 text-start rounded-md focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 cursor-pointer",
+                  toggleSeparators: { betweenItemsAndCounter: "&" },
+                  toggleCountText: "+",
+                  toggleCountTextPlacement: "prefix-no-space",
+                  toggleCountTextMinItems: 3,
+                  toggleCountTextMode: "nItemsAndCount",
+                  dropdownClasses: "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                  optionClasses: "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                  optionTemplate: "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                  extraMarkup: "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                } } %>
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <%= form.label :programming_languages, "Programming languages", class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= form.select :programming_languages,
+                options_for_select(programming_languages_list_helper.sort.map { |l| [l, l] }, params[:programming_languages]),
+                { multiple: true,
+                include_hidden: false },
+                class: "hidden",
+                data: { hs_select: {
+                  hasSearch: true,
+                  searchWrapperClasses: "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                  searchClasses: "block w-full sm:text-sm appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500",
+                  searchPlaceholder: "Search...",
+                  toggleTag: "<button type=\"button\" aria-expanded=\"false\"></button>",
+                  toggleClasses: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 text-start rounded-md focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 cursor-pointer",
+                  toggleSeparators: { betweenItemsAndCounter: "&" },
+                  toggleCountText: "+",
+                  toggleCountTextPlacement: "prefix-no-space",
+                  toggleCountTextMinItems: 3,
+                  toggleCountTextMode: "nItemsAndCount",
+                  dropdownClasses: "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                  optionClasses: "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                  optionTemplate: "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                  extraMarkup: "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                } } %>
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <%= form.label :frameworks, "Frameworks", class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= form.select :frameworks,
+                options_for_select(frameworks_list_helper.sort.map { |f| [f, f] }, params[:frameworks]),
+                { multiple: true,
+                  include_hidden: false },
+                class: "hidden",
+                data: { hs_select: {
+                  hasSearch: true,
+                  searchWrapperClasses: "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                  searchClasses: "block w-full sm:text-sm appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500",
+                  searchPlaceholder: "Search...",
+                  toggleTag: "<button type=\"button\" aria-expanded=\"false\"></button>",
+                  toggleClasses: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 text-start rounded-md focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 cursor-pointer",
+                  toggleSeparators: { betweenItemsAndCounter: "&" },
+                  toggleCountText: "+",
+                  toggleCountTextPlacement: "prefix-no-space",
+                  toggleCountTextMinItems: 3,
+                  toggleCountTextMode: "nItemsAndCount",
+                  dropdownClasses: "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                  optionClasses: "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                  optionTemplate: "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                  extraMarkup: "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                } } %>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <%= form.label :other_tech_stack, "Other tech stack", class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= form.select :other_tech_stack,
+                options_for_select(other_tech_stack_list_helper.sort.map { |tech| [tech, tech] }, params[:other_tech_stack]),
+                { multiple: true,
+                include_hidden: false },
+                class: "hidden",
+                data: { hs_select: {
+                  hasSearch: true,
+                  searchWrapperClasses: "bg-white p-2 -mx-1 sticky top-0 dark:bg-neutral-900",
+                  searchClasses: "block w-full sm:text-sm appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:placeholder:text-gray-500 dark:focus:outline-indigo-500",
+                  searchPlaceholder: "Search...",
+                  toggleTag: "<button type=\"button\" aria-expanded=\"false\"></button>",
+                  toggleClasses: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 text-start rounded-md focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 cursor-pointer",
+                  toggleSeparators: { betweenItemsAndCounter: "&" },
+                  toggleCountText: "+",
+                  toggleCountTextPlacement: "prefix-no-space",
+                  toggleCountTextMinItems: 3,
+                  toggleCountTextMode: "nItemsAndCount",
+                  dropdownClasses: "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                  optionClasses: "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                  optionTemplate: "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                  extraMarkup: "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                } } %>
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <%= form.label :remote, "Remote", class: "block text-sm/6 font-medium text-gray-900 dark:text-white" %>
+          <div class="mt-2 grid grid-cols-1">
+            <%= form.select :remote,
+            options_for_select([["Yes", true], ["No", false]], params[:remote].presence),
+            { prompt: "Select..." },
+              class: "hidden",
+              data: { hs_select: {
+                toggleTag: "<button type=\"button\" aria-expanded=\"false\"></button>",
+                toggleClasses: "col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 text-start rounded-md focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:focus:outline-indigo-500 cursor-pointer",
+                dropdownClasses: "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-900 dark:border-neutral-700",
+                optionClasses: "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                optionTemplate: "<div class=\"flex items-center\"><div class=\"me-2\" data-icon></div><div><div class=\"hs-selected:font-semibold text-sm text-gray-800 dark:text-neutral-200 \" data-title></div></div><div class=\"ms-auto\"><span class=\"hidden hs-selected:block\"><svg class=\"shrink-0 size-4 text-blue-600\" xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" viewBox=\"0 0 16 16\"><path d=\"M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z\"/></svg></span></div></div>",
+                optionAllowEmptyOption: true,
+                extraMarkup: "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"shrink-0 size-3.5 text-gray-500 dark:text-neutral-500 \" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+            } } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8">
+      <%= form.submit "Search", class: "w-full rounded-md bg-indigo-600 px-3.5 py-2.5
+                             text-sm font-semibold text-white shadow-xs
+                             hover:bg-indigo-500 focus-visible:outline-2
+                             focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+                             dark:bg-indigo-500 dark:hover:bg-indigo-400
+                             cursor-pointer" %>
+      </div>
+
+    <% end %>
+  </div>

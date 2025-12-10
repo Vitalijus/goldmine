@@ -4,8 +4,4 @@ export default class extends Controller {
   connect() {
     this.element.textContent = "Hello World!"
   }
-
-  handleClick() {
-    this.element.textContent = "Clicked!"
-  }
 }
