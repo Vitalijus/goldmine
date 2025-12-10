@@ -1,6 +1,21 @@
 class PagesController < ApplicationController
   include PagesHelper
 
+  ALLOWED_REDIRECT_HOSTS = %w[
+    buy.stripe.com
+  ].freeze
+
+  def safe_redirect_url(url)
+    uri = URI.parse(url)
+
+    unless ALLOWED_REDIRECT_HOSTS.include?(uri.host)
+      raise ActionController::BadRequest, "Invalid redirect host"
+    end
+
+    uri.to_s
+  end
+
+  # Actions
   def home
     @top_countries = Opensearch::TopCountriesQuery.new.build_result
   end
@@ -22,11 +37,8 @@ class PagesController < ApplicationController
                                other_tech_stack: params[:other_tech_stack] || [],
                                remote: params[:remote] || nil )
 
-      if params[:stripe_payment_link].start_with?("https://buy.stripe.com/") && payment
-        redirect_to params[:stripe_payment_link] + "?client_reference_id=#{payment.id}", allow_other_host: true
-      else
-        redirect_back(fallback_location: search_path, alert: "Wrong redirect url. Please contact support.")
-      end
+      safe_url = safe_redirect_url(params[:stripe_payment_link])
+      redirect_to("#{safe_url}?client_reference_id=#{payment.id}", allow_other_host: true) if payment
     else
       redirect_back(fallback_location: search_path, alert: "Redirect to checkout is unsuccessfull. Please contact support.")
     end
