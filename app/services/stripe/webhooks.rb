@@ -37,7 +37,7 @@ class Stripe::Webhooks
         payment_intent = payment_intent_data.retrieve
         status = payment_intent&.status
 
-        if payment.present? && status == "complete" && payment_intent.present?
+        if payment.present? && status == "succeeded" && payment_intent.present?
           stripe_product_id = payment_intent&.payment_details&.order_reference
 
           update_payment = payment.update(
@@ -60,7 +60,9 @@ class Stripe::Webhooks
           Rails.logger.error("payment_intent_data: #{payment_intent_data}")
           Rails.logger.error("payment_intent: #{payment_intent}")
           Rails.logger.error("status: #{status}")
-          Rails.logger.error("payment_intent_data: #{payment_intent_data}")
+          Rails.logger.error("payment.present?: #{payment.present?}")
+          Rails.logger.error("status == succeeded: #{status == "succeeded"}")
+          Rails.logger.error("payment_intent.present?: #{payment_intent.present?}")
         end
       else
         # Display error message in logs when event.type is not handled.
