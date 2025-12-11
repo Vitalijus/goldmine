@@ -47,7 +47,7 @@ class Stripe::Webhooks
             stripe_product_id: stripe_product_id
           )
 
-          PaymentMailer.download_email(client_email).deliver_now
+          PaymentMailer.download_email(update_payment).deliver_now
           Rails.logger.info("Email with download link sent to: #{client_email}")
           Rails.logger.info("=================== Event type: checkout.session.completed ==================")
         else
