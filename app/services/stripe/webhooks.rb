@@ -47,22 +47,12 @@ class Stripe::Webhooks
             stripe_product_id: stripe_product_id
           )
 
-          PaymentMailer.download_email(update_payment).deliver_now
-          Rails.logger.info("Email with download link sent to: #{client_email}")
           Rails.logger.info("=================== Event type: checkout.session.completed ==================")
         else
           Rails.logger.error("=================== Event type ERROR: checkout.session.completed ==================")
           Rails.logger.error("client_reference_id: #{client_reference_id}")
           Rails.logger.error("stripe_payment_intent: #{stripe_payment_intent}")
-          Rails.logger.error("amount: #{amount}")
           Rails.logger.error("client_email: #{client_email}")
-          Rails.logger.error("payment: #{payment}")
-          Rails.logger.error("payment_intent_data: #{payment_intent_data}")
-          Rails.logger.error("payment_intent: #{payment_intent}")
-          Rails.logger.error("status: #{status}")
-          Rails.logger.error("payment.present?: #{payment.present?}")
-          Rails.logger.error("status == succeeded: #{status == "succeeded"}")
-          Rails.logger.error("payment_intent.present?: #{payment_intent.present?}")
         end
       else
         # Display error message in logs when event.type is not handled.
