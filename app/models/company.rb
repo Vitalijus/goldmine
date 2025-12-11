@@ -7,6 +7,11 @@ class Company < ApplicationRecord
   #   company.send(:index_document)
   # end
 
+  # To create index run in rails c
+  # OPENSEARCH_CLIENT.indices.create(
+  #   index: "companies"
+  # )
+
   # To delete index run in rails c
   # OPENSEARCH_CLIENT.indices.delete(
   #   index: "companies"

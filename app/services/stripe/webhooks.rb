@@ -32,7 +32,7 @@ class Stripe::Webhooks
         amount = data&.object&.amount
         stripe_product_id = data&.object&.payment_details&.order_reference
         client_email = data&.object&.charges&.data&.first&.billing_details&.email
-      
+
         Payment.create(
           stripe_payment_intent: stripe_payment_intent,
           amount: amount,
