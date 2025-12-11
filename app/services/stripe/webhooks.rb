@@ -26,39 +26,27 @@ class Stripe::Webhooks
 
       # Handle the event
       case event_type
-      when  "payment_intent.succeeded"
-        # https://docs.stripe.com/api/events/types#event_types-payment_intent.succeeded
-        stripe_payment_intent = data&.object&.id
-        amount = data&.object&.amount
-        stripe_product_id = data&.object&.payment_details&.order_reference
-        client_email = data&.object&.charges&.data&.first&.billing_details&.email
-
-        Payment.create(
-          stripe_payment_intent: stripe_payment_intent,
-          amount: amount,
-          client_email: client_email,
-          stripe_product_id: stripe_product_id
-        )
-
-        Rails.logger.info("=================== Event type: payment_intent.succeeded ==================")
       when  "checkout.session.completed"
         client_reference_id = data&.object&.client_reference_id
         stripe_payment_intent = data&.object&.payment_intent
+        amount = data&.object&.amount_total
+        client_email = data&.object&.customer_details&.email
+        status = data&.object&.status
 
-        params = Payment.find(client_reference_id)
-        payment = Payment.find_by(stripe_payment_intent: stripe_payment_intent)
+        payment = Payment.find(client_reference_id)
+        payment_intent_data = Stripe::RetrievePaymentIntent.new(payment_intent_id: stripe_payment_intent)
+        payment_intent = payment_intent_data.retrieve
 
-        if params && payment
+        if payment.present? && status == "complete" && payment_intent.present?
+          stripe_product_id = payment_intent&.payment_details&.order_reference
+
           update_payment = payment.update(
-            countries: params[:countries] || [],
-            cities: params[:cities] || [],
-            programming_languages: params[:programming_languages] || [],
-            frameworks: params[:frameworks] || [],
-            other_tech_stack: params[:other_tech_stack] || [],
-            remote: params[:remote] || nil
+            stripe_payment_intent: stripe_payment_intent,
+            amount: amount,
+            client_email: client_email,
+            stripe_product_id: stripe_product_id
           )
 
-          params.delete if update_payment
           Rails.logger.info("=================== Event type: checkout.session.completed ==================")
         else
           Rails.logger.error("=================== Event type ERROR: checkout.session.completed ==================")
