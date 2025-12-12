@@ -19,7 +19,7 @@ module PagesHelper
 
   # generate CSV sample file
   def companies_sample_file_helper(countries)
-    companies = select_companies(countries).sort_by(&:updated_at).first(10)
+    companies = select_companies(countries).sort_by(&:updated_at).last(10)
     company_hashes = companies.map do |company|
       {
         name: company.name,
