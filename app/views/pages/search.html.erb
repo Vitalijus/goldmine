@@ -8,12 +8,14 @@
   <!-- Header -->
   <%= render "header" %>
 
-  <div class="relative isolate pt-14">
-    <div aria-hidden="true" class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-      <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75 dark:opacity-20"></div>
+  <div class="relative pt-14">
+    <div class="isolate">
+      <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+        <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" class="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75 dark:opacity-20"></div>
+      </div>
     </div>
 
-    <div class="py-24 sm:py-25 lg:pb-0">
+    <div class="px-6 lg:px-8 py-0 sm:py-25 lg:pb-0">
       <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-4xl text-center mb-10">
           <h1 class="text-3xl font-semibold tracking-tight text-balance text-gray-900 sm:text-4xl dark:text-white">Search results</h1>
@@ -26,22 +28,18 @@
         <%= render "search_filters" %>
       </div>
     </div>
-
-    <div aria-hidden="true" class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-      <div style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" class="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-288.75 dark:opacity-20"></div>
-    </div>
   </div>
 </div>
 
 <!-- List of records -->
 <div class="bg-white px-6 pt-5 pb-32 sm:pt-5 sm:pb-32 dark:bg-gray-900">
-  <ul role="list" class="mx-auto max-w-7xl divide-y divide-gray-100 overflow-hidden bg-white shadow-xs outline-1 outline-gray-900/5 sm:rounded-xl dark:divide-white/5 dark:bg-gray-800/50 dark:shadow-none dark:outline-white/10 dark:sm:-outline-offset-1">
+  <ul role="list" class="mx-auto max-w-7xl divide-y divide-gray-100 overflow-hidden bg-white shadow-xs outline-1 outline-gray-900/5 rounded-xl dark:divide-white/5 dark:bg-gray-800/50 dark:shadow-none dark:outline-white/10 dark:sm:-outline-offset-1">
     <div class="border-b border-gray-200 px-4 py-5 sm:px-6 dark:border-white/10">
       <div class="-mt-2 -ml-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
         <div class="mt-2 ml-4">
           <h3 class="text-base font-semibold text-gray-900 dark:text-white">Countries</h3>
         </div>
-        
+
         <div class="mt-2 ml-4 shrink-0">
           <%= link_to pages_export_path(format: :csv, countries: ["US", "GB", "CA", "AU"]), target: "_blank", class: "text-highligther btn btn-primary" do %>
             <button type="button" class="cursor-pointer relative inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:bg-indigo-500 dark:shadow-none dark:hover:bg-indigo-400 dark:focus-visible:outline-indigo-500">Download Sample</button>
