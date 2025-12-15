@@ -17,7 +17,14 @@ class PagesController < ApplicationController
 
   # Actions
   def home
-    @top_countries = Opensearch::TopCountriesQuery.new.build_result
+    get_countries = Opensearch::GetCountriesQuery.new(countries: params[:countries],
+                                                      frameworks: params[:frameworks],
+                                                      languages: params[:programming_languages],
+                                                      other_tech: params[:other_tech_stack],
+                                                      remote: params[:remote],
+                                                      size: 10)
+    @countries = get_countries.build_result
+    @total_us_companies = @countries.find { |item| item[:country] == "United States" }&.dig(:total_companies)
   end
 
   def search
@@ -36,7 +43,7 @@ class PagesController < ApplicationController
                                frameworks: params[:frameworks] || [],
                                other_tech_stack: params[:other_tech_stack] || [],
                                remote: params[:remote] || nil )
-                               
+
       safe_url = safe_redirect_url(params[:stripe_payment_link])
       redirect_to("#{safe_url}?client_reference_id=#{payment.id}", allow_other_host: true) if payment
     else
