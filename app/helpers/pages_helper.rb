@@ -54,6 +54,7 @@ module PagesHelper
     Company.where("countries && ARRAY[?]::text[]", countries)
   end
 
+  # Flags are used for dropdown select field
   def flag_for_country_name_helper(name)
     country = ISO3166::Country.find_country_by_any_name(name)
     return "" unless country&.alpha2
@@ -61,5 +62,16 @@ module PagesHelper
     country.alpha2.chars
            .map { |c| (c.ord + 127397).chr(Encoding::UTF_8) }
            .join
+  end
+
+  # Here is a dynamic header text
+  def dynamic_header(countries, languages, total_companies)
+    if countries&.first == "US" && languages&.first == "Ruby" && total_companies
+      safe_join(["#{total_companies} companies in the ",
+        content_tag(:span, "United States", class: "text-highligther")," actively hiring ",
+        content_tag(:span, "#{languages&.present? ? languages.join(", ") :  "your stack"}", class: "text-highligther")," today."])
+    else
+      safe_join(["Companies actively hiring ", content_tag(:span, "your stack", class: "text-highligther")," today."])
+    end
   end
 end
