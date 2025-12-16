@@ -19,7 +19,9 @@ module PagesHelper
 
   # generate CSV sample file
   def companies_sample_file_helper(countries)
-    companies = select_companies(countries).sort_by(&:updated_at).last(10)
+    companies = Company.where("countries && ARRAY[?]::text[]", countries)
+       .where("programming_languages IS NOT NULL AND array_length(programming_languages, 1) > 0").sort_by(&:updated_at).first(10)
+
     company_hashes = companies.map do |company|
       {
         name: company.name,
