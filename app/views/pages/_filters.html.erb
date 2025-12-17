@@ -1,4 +1,4 @@
-<%= form_with url: pages_home_path, method: :get, local: true, data: { turbo: false } do |form| %>
+<%= form_with url: home_path, method: :get, local: true, data: { turbo: false } do |form| %>
   <!-- Countries-->
   <div data-controller="clear-selects" class="col-span-full mb-4">
     <%= form.select :countries,

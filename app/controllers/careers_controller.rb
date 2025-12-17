@@ -1,6 +1,6 @@
 class CareersController < ApplicationController
   before_action :set_career, only: %i[ show edit update destroy ]
-  before_action :check_secret_key, only: [:new, :create, :edit, :update]
+  before_action :check_secret_key, only: [:new, :edit, :update]
 
   # GET /careers or /careers.json
   def index

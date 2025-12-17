@@ -2,7 +2,7 @@ class Applicant < ApplicationRecord
   belongs_to :career
   has_one_attached :resume
 
-  # after_commit guarantees the job only runs after the Payment has been saved to the DB.
+  # after_commit guarantees the job only runs after the Applicant has been saved to the DB.
   after_commit :send_new_applicant_email, on: :create
   after_commit :store_resume_url, on: [:create, :update]
 
@@ -11,7 +11,7 @@ class Applicant < ApplicationRecord
 
   private
 
-  def store_resume_url # TO DO validate for pdf or doc file, and size
+  def store_resume_url
     return unless resume.attached?
 
     url = Rails.application.routes.url_helpers.url_for(resume)
