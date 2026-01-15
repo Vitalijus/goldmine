@@ -27,15 +27,6 @@ class PagesController < ApplicationController
     @total_us_companies = @countries.find { |item| item[:country] == "United States" }&.dig(:total_companies)
   end
 
-  def search
-    get_countries = Opensearch::GetCountriesQuery.new(countries: params[:countries],
-                                                      frameworks: params[:frameworks],
-                                                      languages: params[:programming_languages],
-                                                      other_tech: params[:other_tech_stack],
-                                                      remote: params[:remote])
-    @countries = get_countries.build_result
-  end
-
   def checkout
     if params[:country].present? && params[:stripe_payment_link].present?
       payment = Payment.create(countries: [ISO3166::Country.find_country_by_any_name(params[:country]).alpha2],
