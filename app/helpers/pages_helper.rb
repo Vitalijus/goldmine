@@ -66,7 +66,7 @@ module PagesHelper
            .join
   end
 
-  # Here is a dynamic header text
+  # Dynamic header text
   def dynamic_header(countries, languages, total_companies)
     if countries&.first == "US" && languages&.first == "Ruby" && total_companies
       safe_join(["#{total_companies} companies in the ",
