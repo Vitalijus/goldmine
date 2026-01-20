@@ -38,6 +38,9 @@ module Opensearch
             filter: query_filter
           }
         },
+        sort: [
+          { updated_at: { order: "desc" } }
+        ],
         size: @size
       }
     end

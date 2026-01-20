@@ -76,7 +76,7 @@ Rails.application.configure do
 
   # Run rails console and test in dev if SMTP work
   # ActionMailer::Base.mail(
-  #   from: "support@rorlist.com",
+  #   from: "company@gemscraper.com",
   #   to: "vitalij.desuk@gmail.com",
   #   subject: "Test email from Rails",
   #   body: "If you see this, your SMTP works!"

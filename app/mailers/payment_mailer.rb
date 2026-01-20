@@ -1,5 +1,6 @@
 class PaymentMailer < ApplicationMailer
-    default from: "rorlist.com <support@rorlist.com>"
+    default from: "gemscraper.com <company@gemscraper.com>"
+
 
     def download_email(payment)
       @payment = payment
