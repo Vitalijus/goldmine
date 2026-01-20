@@ -1,6 +1,6 @@
 class ApplicantMailer < ApplicationMailer
   helper :pages
-  default from: "rorlist.com <support@rorlist.com>"
+  default from: "gemscraper.com <company@gemscraper.com>"
 
   def new_applicant_email(applicant)
     @applicant = applicant

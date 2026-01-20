@@ -1,6 +1,6 @@
 require "active_support/core_ext/integer/time"
 
-Rails.application.routes.default_url_options[:host] = "https://rorlist.com"
+Rails.application.routes.default_url_options[:host] = "https://gemscraper.com"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -91,7 +91,7 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "rorlist.com" }
+  config.action_mailer.default_url_options = { host: "gemscraper.com" }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
