@@ -30,6 +30,7 @@ class ApplicantsController < ApplicationController
         format.html { redirect_to @career, notice: "Application submitted successfully." }
         format.json { render :show, status: :created, location: @career }
       else
+        @applicant.resume = nil
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @applicant.errors, status: :unprocessable_entity }
       end
