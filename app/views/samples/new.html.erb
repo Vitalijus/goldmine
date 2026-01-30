@@ -1,0 +1,41 @@
+<% content_for :title, "List of companies sample file" %>
+
+<%= render "shared/header" %>
+
+<%= form_with(model: sample) do |form| %>
+  <% if company.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(sample.errors.count, "error") %> prohibited this sample from being saved:</h2>
+
+      <ul>
+        <% sample.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div>
+    <%= form.label :country, style: "display: block" %>
+    <%= form.text_field :country %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :url, style: "display: block" %>
+    <%= form.text_field :url %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<div>
+  <h1 class="font-bold text-4xl">Samples#new</h1>
+  <p>Find me in app/views/samples/new.html.erb</p>
+</div>
