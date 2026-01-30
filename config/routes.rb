@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  get "samples/new"
-  get "samples/create"
   get "home", to: "pages#home"
   get "checkout", to: "pages#checkout"
   get "pages/download", to: "pages#download", defaults: { format: :csv }
   get "pages/export", to: "pages#export", defaults: { format: :csv }
 
+  resources :samples, only: [:new, :create]
   resources :companies
   resources :careers do
     resources :applicants, only: [:new, :create]
