@@ -12,10 +12,10 @@
 </div>-->
 
 <%= form_with(model: @sample, class: "sm:col-span-3 w-full") do |form| %>
-  <div class="bg-white px-6 py-6 sm:py-2 lg:px-8 dark:bg-gray-900">
+  <div class="bg-white px-6 lg:px-8 dark:bg-gray-900">
     <div class="mx-auto max-w-[900px] w-full overflow-hidden bg-white shadow-sm rounded-xl dark:bg-gray-800/50 dark:shadow-none dark:inset-ring dark:inset-ring-white/10">
       <div class="px-4 py-6 sm:px-6">
-        <h3 class="text-base/7 font-semibold text-gray-900 dark:text-white">Download sample</h3>
+        <h3 class="text-base/7 font-semibold text-gray-900 dark:text-white">DOWNLOAD SAMPLE</h3>
         <p class="mt-1 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-300">
           You will receive <span class="text-highligther">an email with a link</span> to download the CSV file containing the list of companies.
         </p>
@@ -51,17 +51,12 @@
           dark:bg-indigo-500 dark:hover:bg-indigo-400
           cursor-pointer" %>
         </div>
-
-        <p class="borderline pt-0 px-6 pb-6 mt-1 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-300">
-          You will receive <span class="text-highligther">an email with a link</span> to download the CSV file containing the list of companies.
-        </p>
       </div>
     </div>
   </div>
-  
-  <% end %>
+<% end %>
 
-<div class="bg-white px-6 py-6 sm:py-2 lg:px-8 dark:bg-gray-900">
+<div class="bg-white px-6 py-6 lg:px-8 dark:bg-gray-900">
   <div class="mx-auto max-w-[900px] w-full overflow-hidden bg-white shadow-sm rounded-xl p-6 dark:bg-gray-800/50 dark:shadow-none dark:inset-ring dark:inset-ring-white/10">
     <div>
       <label for="email" class="mb-5 block w-full text-sm/6 font-medium text-gray-900 dark:text-white">
@@ -69,6 +64,90 @@
       </label>
     </div>
 
-    <%= render "pages/filters" %>
+    <%= render "shared/filters" %>
   </div>
+</div>
+
+<!-- List of records -->
+<div class="bg-white pb-32 sm:pb-32 px-6 dark:bg-gray-900">
+  <ul role="list" class="mx-auto max-w-[900px] w-full divide-y divide-gray-100 overflow-hidden bg-white shadow-xs outline-1 outline-gray-900/5 rounded-xl dark:divide-white/5 dark:bg-gray-800/50 dark:shadow-none dark:outline-white/10 dark:sm:-outline-offset-1">
+    <div class="border-b border-gray-200 px-4 py-5 sm:px-6 dark:border-white/10">
+      <div class="-mt-2 -ml-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
+        <div class="mt-2 ml-4">
+          <h3 class="text-base font-semibold text-gray-900 dark:text-white">Countries</h3>
+          <p id="email-description" class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+            After completing checkout, you will receive <span class="text-highligther">an email with a link</span> to download the CSV file containing the list of companies.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <% @countries.each do |country| %>
+      <li class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-gray-50 sm:px-6 dark:hover:bg-white/2.5">
+        <%= link_to checkout_path(stripe_payment_link: country[:stripe_payment_link],
+                                  country: country[:country],
+                                  programming_languages: params[:programming_languages],
+                                  frameworks: params[:frameworks],
+                                  other_tech_stack: params[:other_tech_stack],
+                                  remote: params[:remote]),
+                                  target: "_blank",
+                                  rel: "noopener noreferrer" do %>
+
+          <div class="flex min-w-0 gap-x-4">
+            <%= flag_for_country_name_helper(country[:country]) %>
+
+            <div class="min-w-0 flex-auto">
+              <p class="text-sm/6 font-semibold text-gray-900 dark:text-white">
+                <span class="absolute inset-x-0 -top-px bottom-0"></span>
+              </p>
+                <%= country[:country] %>
+              <p class="mt-1 flex text-xs/5 text-gray-500 dark:text-gray-400">
+                <%= pluralize(country[:total_companies], "company") %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="flex shrink-0 items-center gap-x-4">
+          <div class="sm:flex sm:flex-col sm:items-end">
+            <p class="text-sm/6 text-gray-900 dark:text-white text-right">$<%= country[:price] / 1000 %></p>
+            <p class="hidden sm:inline-block mt-1 text-xs/5 text-gray-500 dark:text-gray-400">
+              Popular: <%= country[:popular_languages] %>
+            </p>
+          </div>
+
+          <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5 flex-none text-indigo-600 dark:text-indigo-400">
+            <path d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        </div>
+      </li>
+    <% end %>
+
+    <div class="px-6 py-8 sm:rounded-b-xl border-t border-gray-50 dark:border-white/5">
+      <h4 class="text-sm font-semibold text-gray-900 dark:text-white">
+        Trusted and verified data
+      </h4>
+
+      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+        Our country-level datasets are built from verified public and commercial sources and continuously maintained to
+        ensure accuracy. We focus on regions with proven startup activity, consistent hiring demand, and strong software
+        ecosystems.
+      </p>
+
+      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+        Every record is structured and standardized, including location, technology stack and
+        recent hiring signals — so you can make confident decisions without manual research or guesswork.
+      </p>
+
+      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400">
+        There is no subscription lock-in, no hidden fees, and no long-term commitment. You receive exactly what’s shown,
+        ready to use immediately.
+      </p>
+
+      <p class="mt-4 text-sm font-medium text-indigo-600 dark:text-indigo-400">
+        Download once, use forever — or export custom datasets tailored to your needs.
+      </p>
+    </div>
+
+  </ul>
 </div>
