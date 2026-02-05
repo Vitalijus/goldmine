@@ -1,37 +1,33 @@
 <% content_for :title, "List of companies sample file" %>
 
+<%= render "shared/notice" %>
 <%= render "shared/header" %>
 
-<!--div class="bg-white px-4 py-12 sm:py-16 lg:px-6 dark:bg-gray-900">
-  <div class="mx-auto max-w-2xl text-center">
-    <h2 class="text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl dark:text-white">Get your sample file.</h2>
-    <p class="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-      some text &middot; 2nd text &middot; another text
-    </p>
-  </div>
-</div>-->
-
-<%= form_with(model: @sample, class: "sm:col-span-3 w-full") do |form| %>
+<%= form_with(model: @sample, class: "sm:col-span-3 w-full", data: { turbo: false }) do |form| %>
   <div class="bg-white px-6 lg:px-8 dark:bg-gray-900">
     <div class="mx-auto max-w-[900px] w-full overflow-hidden bg-white shadow-sm rounded-xl dark:bg-gray-800/50 dark:shadow-none dark:inset-ring dark:inset-ring-white/10">
       <div class="px-4 py-6 sm:px-6">
         <h3 class="text-base/7 font-semibold text-gray-900 dark:text-white">DOWNLOAD SAMPLE</h3>
         <p class="mt-1 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-300">
-          You will receive <span class="text-highligther">an email with a link</span> to download the CSV file containing the list of companies.
+          Get a <span class="text-highligther">free list</span> of companies hiring your stack today.
         </p>
       </div>
       
-      <% if @sample.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(sample.errors.count, "error") %> prohibited this sample from being saved:</h2>
+      <div class="px-4 sm:px-6 space-y-5">
+        <% if @sample.errors.any? %>
+          <div class="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-red-700 dark:border-red-500/30 dark:bg-red-900/20 dark:text-red-300">
+            <h2 class="mb-2 text-sm font-semibold">
+              <%= pluralize(@sample.errors.count, "error") %> prohibited this sample from being saved:
+            </h2>
 
-          <ul>
-            <% sample.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+            <ul class="list-disc space-y-1 pl-5 text-sm">
+              <% @sample.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
 
       <div class="border-t border-gray-100 dark:border-white/5">
         <div class="px-6 pt-6 pb-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
