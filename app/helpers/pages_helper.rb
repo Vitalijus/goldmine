@@ -15,7 +15,7 @@ module PagesHelper
   # Rounded to nearest 10 for better readability.
   def total_companies
     companies_count = Company.all.count
-    rounded_count = (companies_count / 10) * 10
+    rounded_count = (companies_count / 100) * 100
     "#{rounded_count}+"
   end
 
