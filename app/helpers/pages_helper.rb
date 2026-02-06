@@ -11,31 +11,12 @@ module PagesHelper
     ).count
   end
 
+  # Total companies count for dynamic header text or email content. 
+  # Rounded to nearest 10 for better readability.
   def total_companies
     companies_count = Company.all.count
     rounded_count = (companies_count / 10) * 10
     "#{rounded_count}+"
-  end
-
-  # generate CSV sample file
-  def companies_sample_file_helper(countries)
-    companies = Company.where("countries && ARRAY[?]::text[]", countries)
-       .where("programming_languages IS NOT NULL AND array_length(programming_languages, 1) > 0").sort_by(&:updated_at).first(10)
-
-    company_hashes = companies.map do |company|
-      {
-        name: company.name,
-        url: company.url,
-        updated_at: company.updated_at&.strftime("%F"),
-        programming_languages: company.programming_languages.join(", "),
-        frameworks: company.frameworks.join(", "),
-        countries: countries.join(", ")
-      }
-    end
-
-    CSV.generate(write_headers: true, headers: company_hashes.first&.keys) do |csv|
-      company_hashes.each { |company| csv << company.values }
-    end
   end
 
   # download CSV companies list file

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "pages/download", to: "pages#download", defaults: { format: :csv }
   get "pages/export", to: "pages#export", defaults: { format: :csv }
 
+  resources :samples, only: [:new, :create]
   resources :companies
   resources :careers do
     resources :applicants, only: [:new, :create]

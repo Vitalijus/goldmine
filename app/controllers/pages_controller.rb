@@ -25,6 +25,9 @@ class PagesController < ApplicationController
                                                       size: 10)
     @countries = get_countries.build_result
     @total_us_companies = @countries.find { |item| item[:country] == "United States" }&.dig(:total_companies)
+
+    # Dynamically set form action URL based on presence of search parameters
+    @form_action_url = home_path
   end
 
   def checkout
@@ -39,23 +42,6 @@ class PagesController < ApplicationController
       redirect_to("#{safe_url}?client_reference_id=#{payment.id}", allow_other_host: true) if payment
     else
       redirect_back(fallback_location: search_path, alert: "Redirect to checkout is unsuccessfull. Please contact support.")
-    end
-  end
-
-  # export sample CSV
-  def export
-    return unless params[:countries]
-
-    countries = params[:countries].map{ |country| country.downcase }
-    csv_data = companies_sample_file_helper(params[:countries])
-
-    respond_to do |format|
-      format.csv do
-        send_data csv_data,
-          filename: "sample.csv",
-          type: "text/csv",
-          disposition: "attachment"  # forces download
-      end
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_01_134117) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_30_143756) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -105,6 +105,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_01_134117) do
     t.text "other_tech_stack", default: [], null: false, array: true
     t.text "cities", default: [], null: false, array: true
     t.boolean "remote"
+  end
+
+  create_table "samples", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email"
+    t.text "programming_languages", default: [], null: false, array: true
+    t.text "frameworks", default: [], null: false, array: true
+    t.text "other_tech_stack", default: [], null: false, array: true
+    t.text "countries", default: [], null: false, array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
