@@ -4,7 +4,6 @@ class SamplesController < ApplicationController
   # GET /samples/new
   def new
     @sample = Sample.new
-
     # Dynamically set form action URL based on presence of search parameters
     @form_action_url = new_sample_path
   end
@@ -15,6 +14,8 @@ class SamplesController < ApplicationController
 
     respond_to do |format|
       if @sample.save
+        SampleMailer.download_sample_email(@sample).deliver_now
+
         format.html { redirect_to new_sample_path, notice: "Sample request successfully created." }
         format.json { render :new, status: :created, location: @sample }
       else
