@@ -4,6 +4,9 @@ class SamplesController < ApplicationController
   # GET /samples/new
   def new
     @sample = Sample.new
+
+    # Dynamically set form action URL based on presence of search parameters
+    @form_action_url = new_sample_path
   end
 
   # POST /samples or /samples.json
@@ -39,6 +42,6 @@ class SamplesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def sample_params
-    params.expect(sample: [ :email, :programming_languages, :frameworks, :other_tech_stack, :countries ])
+    params.expect(sample: [ :email, programming_languages: [], frameworks: [], other_tech_stack: [], countries: [] ])
   end
 end

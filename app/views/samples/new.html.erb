@@ -39,6 +39,14 @@
           </div>
         </div>
         
+        <% { countries: :countries, programming_languages: :programming_languages, frameworks: :frameworks, other_tech_stack: :other_tech_stack
+           }.each do |param_key, field_name| %>
+              <% Array(params[param_key]).each do |value| %>
+                <%= hidden_field_tag "sample[#{field_name}][]", value %>
+              <% end %>
+          <% end %>
+
+
         <div class="p-6 text-center flex items-center justify-end gap-x-4">
           <%= form.submit "Get companies list", class: "w-full rounded-md bg-indigo-600 px-3.5 py-2.5
           text-sm font-semibold text-white shadow-xs
@@ -53,14 +61,14 @@
 <% end %>
 
 <div class="bg-white px-6 py-6 lg:px-8 dark:bg-gray-900">
-  <div class="mx-auto max-w-[900px] w-full overflow-hidden bg-white shadow-sm rounded-xl p-6 dark:bg-gray-800/50 dark:shadow-none dark:inset-ring dark:inset-ring-white/10">
+  <div class="overflow-visible mx-auto max-w-[900px] w-full overflow-hidden bg-white shadow-sm rounded-xl p-6 dark:bg-gray-800/50 dark:shadow-none dark:inset-ring dark:inset-ring-white/10">
     <div>
       <label for="email" class="mb-5 block w-full text-sm/6 font-medium text-gray-900 dark:text-white">
         FILTERS
       </label>
     </div>
 
-    <%= render "shared/filters" %>
+    <%= render "shared/filters", form_action_url: @form_action_url %>
   </div>
 </div>
 

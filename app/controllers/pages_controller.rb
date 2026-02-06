@@ -25,6 +25,9 @@ class PagesController < ApplicationController
                                                       size: 10)
     @countries = get_countries.build_result
     @total_us_companies = @countries.find { |item| item[:country] == "United States" }&.dig(:total_companies)
+
+    # Dynamically set form action URL based on presence of search parameters
+    @form_action_url = home_path
   end
 
   def checkout
