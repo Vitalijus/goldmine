@@ -1,4 +1,9 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  # Access it at http://localhost:3000/sidekiq
+  mount Sidekiq::Web => "/sidekiq" 
+  
   get "home", to: "pages#home"
   get "checkout", to: "pages#checkout"
   get "pages/download", to: "pages#download", defaults: { format: :csv }
