@@ -13,6 +13,6 @@
   enabled: true
   schedule:
     notify_samples_of_new_companies:
-      cron: '0 */1 * * *'
+      cron: '0 9 1 * *' # 1st of every month at 09:00
       class: SampleSchedulerJob
-      enabled: false
+      enabled: true
