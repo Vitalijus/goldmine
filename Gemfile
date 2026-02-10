@@ -91,3 +91,9 @@ gem 'countries', require: 'countries/global'
 
 # OpenSearch
 gem "opensearch-ruby", "~> 3.4"
+
+# Sidekiq background workers
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'sidekiq-unique-jobs'
+gem 'sidekiq-limit_fetch'

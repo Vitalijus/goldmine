@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Your Companies List Sample</title>
+  <style>
+    @media only screen and (max-width: 600px) {
+      .container { width: 100% !important; padding: 20px !important; }
+      .hero { font-size: 20px !important; }
+      .content { font-size: 16px !important; }
+      .button { width: 100% !important; display: block !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f6f8; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+  <!-- Hidden preheader -->
+  <div style="display:none; max-height:0px; overflow:hidden; mso-hide:all;">
+    Here’s your free sample of companies hiring worldwide — explore the full database today.
+  </div>
+
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#f4f6f8;">
+    <tr>
+      <td align="center" style="padding:32px 16px;">
+        <table role="presentation" class="container" border="0" cellpadding="0" cellspacing="0" width="600" style="width:600px; max-width:100%; background:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 8px 30px rgba(16,24,40,0.08);">
+
+        <!-- Header -->
+        <tr>
+        <td style="padding:28px 32px; background:linear-gradient(90deg,#4f46e5,#7c3aed); color:#fff;">
+            <h1 style="margin:0; font-size:22px; font-weight:700;">New Companies Just Added 🚀</h1>
+        </td>
+        </tr>
+
+          <!-- Body -->
+          <tr>
+            <td style="padding:32px;">
+            <p style="margin:0 0 16px 0; color:#0f172a; font-size:18px; line-height:1.5;">
+                Hi There,
+            </p>
+
+            <p style="margin:0 0 16px 0; color:#334155; font-size:16px; line-height:1.6;">
+                We’ve just updated our companies database with newly verified employers actively hiring developers — and as part of that update, you’re getting a <strong>fresh free sample</strong>.
+            </p>
+
+            <p style="margin:0 0 24px 0; color:#334155; font-size:16px; line-height:1.6;">
+                Below are <strong>10 newly selected companies</strong> that match your preferences (location, tech stack, and hiring signals), pulled from our latest update.
+            </p>
+
+            <!-- Sample table -->
+            <table role="presentation" cellpadding="8" cellspacing="0" width="100%" style="border-collapse:collapse; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
+                <thead style="background-color:#f8fafc;">
+                <tr>
+                    <th align="left" style="padding:10px 12px; color:#334155; font-size:14px; border-bottom:1px solid #e2e8f0;">Company</th>
+                    <th align="left" style="padding:10px 12px; color:#334155; font-size:14px; border-bottom:1px solid #e2e8f0;">Website</th>
+                    <th align="left" style="padding:10px 12px; color:#334155; font-size:14px; border-bottom:1px solid #e2e8f0;">Last updated</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% companies_for_sample(@sample).each do |company| %>
+                    <tr>
+                    <td style="padding:8px 12px; border-bottom:1px solid #f1f5f9;"><%= company[:name] %></td>
+                    <td style="padding:8px 12px; border-bottom:1px solid #f1f5f9;">
+                        <a href="<%= company[:url] %>" style="color:#4f46e5; text-decoration:none;"><%= company[:url] %></a>
+                    </td>
+                    <td style="padding:8px 12px; border-bottom:1px solid #f1f5f9;"><%= company[:updated_at] %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+
+            <!-- Call to action -->
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin:32px 0 0 0;">
+                <tr>
+                <td align="center">
+                    <p style="margin:0 0 12px 0; color:#334155; font-size:16px;">
+                    This sample is part of our latest update — the full dataset now includes <strong><%= total_companies %> verified companies</strong>.
+                    </p>
+                    <a href="https://gemscraper.com" class="button" style="background:#4f46e5; color:#ffffff; text-decoration:none; padding:14px 22px; border-radius:10px; display:inline-block; font-weight:600; font-size:16px; box-shadow:0 6px 18px rgba(79,70,229,0.18);">
+                    Unlock the Full Updated List →
+                    </a>
+                    <p style="margin-top:12px; color:#64748b; font-size:14px;">
+                    Updated monthly · Download once · Use forever
+                    </p>
+                </td>
+                </tr>
+            </table>
+
+            <p style="margin:28px 0 0 0; color:#64748b; font-size:14px; line-height:1.5;">
+                Happy searching,<br>
+                <strong>The GemScraper Team</strong>
+            </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 32px; background:#f9fafb; color:#64748b; font-size:13px;">
+              <div style="font-weight:600; color:#0f172a;">GemScraper</div>
+              <div style="margin-top:6px;">&copy; <%= Time.now.year %> Newbury Consulting LLC. All rights reserved.</div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
