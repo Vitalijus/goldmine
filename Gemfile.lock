@@ -491,6 +491,7 @@ DEPENDENCIES
   jbuilder
   json (~> 2.15, >= 2.15.2)
   kamal
+  net-http
   nokogiri (~> 1.18, >= 1.18.10)
   open-uri
   opensearch-ruby (~> 3.4)

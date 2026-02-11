@@ -36,7 +36,8 @@ class PagesController < ApplicationController
                                programming_languages: params[:programming_languages] || [],
                                frameworks: params[:frameworks] || [],
                                other_tech_stack: params[:other_tech_stack] || [],
-                               remote: params[:remote] || nil )
+                               remote: params[:remote] || nil,
+                               ga_client_id: params[:ga_client_id] || nil)
 
       safe_url = safe_redirect_url(params[:stripe_payment_link])
       redirect_to("#{safe_url}?client_reference_id=#{payment.id}", allow_other_host: true) if payment

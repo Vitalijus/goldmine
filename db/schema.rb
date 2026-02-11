@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_30_143756) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_11_134500) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -105,6 +105,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_30_143756) do
     t.text "other_tech_stack", default: [], null: false, array: true
     t.text "cities", default: [], null: false, array: true
     t.boolean "remote"
+    t.string "ga_client_id"
   end
 
   create_table "samples", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

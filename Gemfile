@@ -97,3 +97,6 @@ gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'sidekiq-unique-jobs'
 gem 'sidekiq-limit_fetch'
+
+# HTTP client
+gem 'net-http'
