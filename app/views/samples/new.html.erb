@@ -1,5 +1,6 @@
 <% content_for :title, "Download sample" %>
 
+<%= render "shared/alert" %>
 <%= render "shared/notice" %>
 <%= render "shared/header" %>
 
@@ -175,3 +176,15 @@
 
   </ul>
 </div>
+
+<!-- Event view_sample_page tracking for gtag -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    gtag('event', 'view_sample_page', {
+      programming_languages: "<%= Array(params[:programming_languages]).join(',') %>",
+      countries: "<%= Array(params[:countries]).join(',') %>",
+      frameworks: "<%= Array(params[:frameworks]).join(',') %>",
+      other_tech_stack: "<%= Array(params[:other_tech_stack]).join(',') %>"
+    });
+  });
+</script>

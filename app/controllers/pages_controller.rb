@@ -41,7 +41,7 @@ class PagesController < ApplicationController
       safe_url = safe_redirect_url(params[:stripe_payment_link])
       redirect_to("#{safe_url}?client_reference_id=#{payment.id}", allow_other_host: true) if payment
     else
-      redirect_back(fallback_location: search_path, alert: "Redirect to checkout is unsuccessfull. Please contact support.")
+      redirect_back(fallback_location: root_url, alert: "Redirect to checkout is unsuccessfull. Try again or contact support.")
     end
   end
 

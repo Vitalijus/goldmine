@@ -16,6 +16,13 @@ class SamplesController < ApplicationController
       if @sample.save
         SampleMailer.download_sample_email(@sample).deliver_now
 
+        # Set gtag lead_created event tracking flash data
+        flash[:lead_created] = true
+        flash[:countries] = Array(@sample.countries).join(',')
+        flash[:programming_languages] = Array(@sample.programming_languages).join(',')
+        flash[:frameworks] = Array(@sample.frameworks).join(',')
+        flash[:other_tech_stack] = Array(@sample.other_tech_stack).join(',')
+
         format.html { redirect_to new_sample_path, notice: "Sample request successfully created." }
         format.json { render :new, status: :created, location: @sample }
       else

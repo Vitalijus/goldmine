@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="bg-white dark:bg-gray-950 scheme-light dark:scheme-dark">
   <head>
-    <title><%= content_for(:title) || "Goldmine" %></title>
+    <title><%= content_for(:title) || "Companies list hiring your stack today" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -41,5 +41,18 @@
       <!-- LinkedIn Insight Tag -->
       <%= render "layouts/linkedin_insight_tag" %>
     </footer>
+
+    <!-- Google tag event listener for lead_created -->
+    <% if flash[:lead_created] %>
+      <script>
+        gtag('event', 'generate_lead', {
+          value: 1,
+          programming_languages: "<%= flash[:programming_languages] %>",
+          countries: "<%= flash[:countries] %>",
+          frameworks: "<%= flash[:frameworks] %>",
+          other_tech_stack: "<%= flash[:other_tech_stack] %>"
+        });
+      </script>
+    <% end %>
   </body>
 </html>
