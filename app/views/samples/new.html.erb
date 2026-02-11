@@ -1,5 +1,6 @@
 <% content_for :title, "Download sample" %>
 
+<%= render "shared/alert" %>
 <%= render "shared/notice" %>
 <%= render "shared/header" %>
 
@@ -114,6 +115,7 @@
                                   frameworks: params[:frameworks],
                                   other_tech_stack: params[:other_tech_stack],
                                   remote: params[:remote]),
+                                  class: "checkout-link",
                                   target: "_blank",
                                   rel: "noopener noreferrer" do %>
 
@@ -175,3 +177,18 @@
 
   </ul>
 </div>
+
+<!-- Capture GA4 client_id in Browser -->
+<%= render "shared/gtag_client_id" %>
+
+<!-- Event view_sample_page tracking for gtag -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    gtag('event', 'view_sample_page', {
+      programming_languages: "<%= Array(params[:programming_languages]).join(',') %>",
+      countries: "<%= Array(params[:countries]).join(',') %>",
+      frameworks: "<%= Array(params[:frameworks]).join(',') %>",
+      other_tech_stack: "<%= Array(params[:other_tech_stack]).join(',') %>"
+    });
+  });
+</script>

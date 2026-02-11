@@ -36,6 +36,7 @@ class Stripe::Webhooks
         payment_intent_data = Stripe::RetrievePaymentIntent.new(payment_intent_id: stripe_payment_intent)
         payment_intent = payment_intent_data.retrieve
         status = payment_intent&.status
+        ga_client_id = payment&.ga_client_id
 
         if payment.present? && status == "succeeded" && payment_intent.present?
           stripe_product_id = payment_intent&.payment_details&.order_reference
@@ -46,6 +47,9 @@ class Stripe::Webhooks
             client_email: client_email,
             stripe_product_id: stripe_product_id
           )
+
+          # Include GA4 purchase event if payment is updated successfully
+          GoogleAnalytics::PurchaseMeasurement.send_ga4_purchase(payment, ga_client_id) if update_payment         
 
           # A known issue if mailer is set to async deliver_later it gives an error:
           # PG::UndefinedTable: ERROR:  relation "solid_queue_processes"
